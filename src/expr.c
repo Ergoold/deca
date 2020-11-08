@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "expr.h"
 #include "num.h"
+#include "error.h"
 #include "io.h"
 
 num_t readatom(void);
@@ -13,7 +14,7 @@ num_t readunary(char);
 num_t readexpr(void)
 {
 	num_t val = readatom();
-	if (erred) return val;
+	if (haderror()) return val;
 
 	char op = ' ';
 	while (op != '\0' && op != ')' && op != '|') {
@@ -71,7 +72,7 @@ num_t readatom(void)
 num_t readplus(num_t val, char op)
 {
 	num_t nextval = readatom();
-	if (erred) return val;
+	if (haderror()) return val;
 	char nextop = getop();
 
 	switch (nextop) {
@@ -94,7 +95,7 @@ num_t readplus(num_t val, char op)
 num_t readmult(num_t val, char op)
 {
 	num_t nextval = readatom();
-	if (erred) return val;
+	if (haderror()) return val;
 	char nextop = getop();
 
 	switch (nextop) {
@@ -117,7 +118,7 @@ num_t readmult(num_t val, char op)
 num_t readexp(num_t val, char op)
 {
 	num_t nextval = readatom();
-	if (erred) return val;
+	if (haderror()) return val;
 	char nextop = getop();
 
 	switch (nextop) {
@@ -138,7 +139,7 @@ num_t readexp(num_t val, char op)
 num_t readunary(char op)
 {
 	num_t val = readatom();
-	if (erred) return val;
+	if (haderror()) return val;
 	char nextop = getop();
 
 	switch (nextop) {

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "num.h"
+#include "error.h"
 #include "io.h"
 
 #define MAX_LINE 256
@@ -34,17 +35,10 @@ int isdec(char c)
 	return '0' <= c && c <= '9';
 }
 
-void error(char *message)
-{
-	if (erred != 0) return;
-	fprintf(stderr, "deca: %s\n", message);
-	erred = 1;
-}
-
 int prompt(void)
 {
 	fputs("deca> ", stdout);
-	erred = 0;
+	clearerror();
 	fgets(line, MAX_LINE, stdin);
 	index = 0;
 	return !feof(stdin);
@@ -52,7 +46,7 @@ int prompt(void)
 
 void show(num_t result)
 {
-	if (!erred) printf("= %g\n", result);
+	if (!haderror()) printf("= %g\n", result);
 }
 
 void putback(void)
