@@ -1,5 +1,7 @@
 # deca
 
+![license](https://img.shields.io/github/license/Ergoold/deca)
+
 deca (from desk calculator) is a simple utility that reads and evaluates mathematical expressions.
 
 ## Usage
