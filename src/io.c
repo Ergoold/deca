@@ -17,6 +17,7 @@ char advance(void)
 	char val = ' ';
 	while (val == ' ' || val == '\t')
 		val = *(line + index++);
+	if (val == '\n') val = '\0'; 
 	if (val == '\0') index--;
 	return val;
 }
