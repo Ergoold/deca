@@ -20,6 +20,7 @@ num_t readexpr(void)
 	while (op != '\0' && op != ')' && op != '|') {
 		op = advance();
 		switch (op) {
+		case '\0': case ')': case '|': break;
 		case '+': case '-':
 			val = readplus(val, op);
 			break;
@@ -28,6 +29,9 @@ num_t readexpr(void)
 			break;
 		case '^':
 			val = readexp(val, op);
+			break;
+		default:
+			error("unrecognized operation");
 			break;
 		}
 	}
