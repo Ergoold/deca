@@ -12,15 +12,6 @@ static char *line;
 /* the index of the current character */
 static char index;
 
-char getop(void)
-{
-	char op = ' ';
-	while (op != '+' && op != '-' && op != '*' && op != '/' && op != '%'
-			&& op != '^' && op != ')' && op != '|' && op != '\0')
-		op = advance();
-	return op;
-}
-
 char advance(void)
 {
 	char val = ' ';

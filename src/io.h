@@ -3,9 +3,6 @@
 
 #include "num.h"
 
-/* reads until reaching an operator and returns it */
-char getop(void);
-
 /* reads the next character */
 char advance(void);
 

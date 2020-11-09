@@ -18,7 +18,7 @@ num_t readexpr(void)
 
 	char op = ' ';
 	while (op != '\0' && op != ')' && op != '|') {
-		op = getop();
+		op = advance();
 		switch (op) {
 		case '+': case '-':
 			val = readplus(val, op);
@@ -73,12 +73,14 @@ num_t readplus(num_t val, char op)
 {
 	num_t nextval = readatom();
 	if (haderror()) return val;
-	char nextop = getop();
+	char nextop = advance();
 
 	switch (nextop) {
-	case '\0': case ')': case '|':
+	case ')': case '|':
 	case '+': case '-':
 		putback();
+		// fallthrough
+	case '\0':
 		return eval(val, op, nextval);
 	case '*': case '/': case '%':
 		nextval = readmult(nextval, nextop);
@@ -96,12 +98,14 @@ num_t readmult(num_t val, char op)
 {
 	num_t nextval = readatom();
 	if (haderror()) return val;
-	char nextop = getop();
+	char nextop = advance();
 
 	switch (nextop) {
-	case '\0': case ')': case '|':
+	case ')': case '|':
 	case '+': case '-':
 		putback();
+		// fallthrough
+	case '\0':
 		return eval(val, op, nextval);
 	case '*': case '/': case '%':
 		nextval = readexp(nextval, nextop);
@@ -119,13 +123,15 @@ num_t readexp(num_t val, char op)
 {
 	num_t nextval = readatom();
 	if (haderror()) return val;
-	char nextop = getop();
+	char nextop = advance();
 
 	switch (nextop) {
-	case '\0': case ')': case '|':
+	case ')': case '|':
 	case '+': case '-':
 	case '*': case '/': case '%':
 		putback();
+		// fallthrough
+	case '\0':
 		return eval(val, op, nextval);
 	case '^':
 		nextval = readexp(nextval, nextop);
@@ -140,13 +146,15 @@ num_t readunary(char op)
 {
 	num_t val = readatom();
 	if (haderror()) return val;
-	char nextop = getop();
+	char nextop = advance();
 
 	switch (nextop) {
-	case '\0': case ')': case '|':
+	case ')': case '|':
 	case '+': case '-':
 	case '*': case '/': case '%':
 		putback();
+		// fallthrough
+	case '\0':
 		return eval(0, op, val);
 	case '^':
 		val = readexp(val, nextop);
