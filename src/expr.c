@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "expr.h"
 #include "num.h"
+#include "error.h"
 #include "io.h"
 
 num_t readatom(void);
@@ -13,12 +14,13 @@ num_t readunary(char);
 num_t readexpr(void)
 {
 	num_t val = readatom();
-	if (erred) return val;
+	if (haderror()) return val;
 
 	char op = ' ';
 	while (op != '\0' && op != ')' && op != '|') {
-		op = getop();
+		op = advance();
 		switch (op) {
+		case '\0': case ')': case '|': break;
 		case '+': case '-':
 			val = readplus(val, op);
 			break;
@@ -27,6 +29,9 @@ num_t readexpr(void)
 			break;
 		case '^':
 			val = readexp(val, op);
+			break;
+		default:
+			error("unrecognized operation");
 			break;
 		}
 	}
@@ -71,13 +76,15 @@ num_t readatom(void)
 num_t readplus(num_t val, char op)
 {
 	num_t nextval = readatom();
-	if (erred) return val;
-	char nextop = getop();
+	if (haderror()) return val;
+	char nextop = advance();
 
 	switch (nextop) {
-	case '\0': case ')': case '|':
+	case ')': case '|':
 	case '+': case '-':
 		putback();
+		// fallthrough
+	case '\0':
 		return eval(val, op, nextval);
 	case '*': case '/': case '%':
 		nextval = readmult(nextval, nextop);
@@ -94,13 +101,15 @@ num_t readplus(num_t val, char op)
 num_t readmult(num_t val, char op)
 {
 	num_t nextval = readatom();
-	if (erred) return val;
-	char nextop = getop();
+	if (haderror()) return val;
+	char nextop = advance();
 
 	switch (nextop) {
-	case '\0': case ')': case '|':
+	case ')': case '|':
 	case '+': case '-':
 		putback();
+		// fallthrough
+	case '\0':
 		return eval(val, op, nextval);
 	case '*': case '/': case '%':
 		nextval = readexp(nextval, nextop);
@@ -117,14 +126,16 @@ num_t readmult(num_t val, char op)
 num_t readexp(num_t val, char op)
 {
 	num_t nextval = readatom();
-	if (erred) return val;
-	char nextop = getop();
+	if (haderror()) return val;
+	char nextop = advance();
 
 	switch (nextop) {
-	case '\0': case ')': case '|':
+	case ')': case '|':
 	case '+': case '-':
 	case '*': case '/': case '%':
 		putback();
+		// fallthrough
+	case '\0':
 		return eval(val, op, nextval);
 	case '^':
 		nextval = readexp(nextval, nextop);
@@ -138,14 +149,16 @@ num_t readexp(num_t val, char op)
 num_t readunary(char op)
 {
 	num_t val = readatom();
-	if (erred) return val;
-	char nextop = getop();
+	if (haderror()) return val;
+	char nextop = advance();
 
 	switch (nextop) {
-	case '\0': case ')': case '|':
+	case ')': case '|':
 	case '+': case '-':
 	case '*': case '/': case '%':
 		putback();
+		// fallthrough
+	case '\0':
 		return eval(0, op, val);
 	case '^':
 		val = readexp(val, nextop);

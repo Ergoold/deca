@@ -3,20 +3,11 @@
 
 #include "num.h"
 
-/* this variable is set to 1 when an error occures */
-int erred;
-
-/* reads until reaching an operator and returns it */
-char getop(void);
-
 /* reads the next character */
 char advance(void);
 
 /* tests if a character is a decimal digit */
 int isdec(char);
-
-/* prints an error message to stderr and sets erred to 1 */
-void error(char *);
 
 /* prints the prompt to stdout and sets erred to 0; returns 0 on eof */
 int prompt(void);
