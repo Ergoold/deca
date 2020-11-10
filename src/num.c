@@ -31,7 +31,7 @@ num_t eval(num_t left, char op, num_t right)
 	case '^':
 		return pow(left, right);
 	case 'v':
-		if (left < 0) {
+		if (right < 0) {
 			error("took root of negative number");
 		}
 		return pow(right, 1 / left);
