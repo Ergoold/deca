@@ -27,7 +27,7 @@ num_t readexpr(void)
 		case '*': case '/': case '%':
 			val = readmult(val, op);
 			break;
-		case '^':
+		case '^': case 'v':
 			val = readexp(val, op);
 			break;
 		default:
@@ -89,7 +89,7 @@ num_t readplus(num_t val, char op)
 	case '*': case '/': case '%':
 		nextval = readmult(nextval, nextop);
 		return eval(val, op, nextval);
-	case '^':
+	case '^': case 'v':
 		nextval = readexp(nextval, nextop);
 		return eval(val, op, nextval);
 	default:
@@ -114,7 +114,7 @@ num_t readmult(num_t val, char op)
 	case '*': case '/': case '%':
 		nextval = readexp(nextval, nextop);
 		return eval(val, op, nextval);
-	case '^':
+	case '^': case 'v':
 		nextval = readexp(nextval, nextop);
 		return eval(val, op, nextval);
 	default:
@@ -137,7 +137,7 @@ num_t readexp(num_t val, char op)
 		// fallthrough
 	case '\0':
 		return eval(val, op, nextval);
-	case '^':
+	case '^': case 'v':
 		nextval = readexp(nextval, nextop);
 		return eval(val, op, nextval);
 	default:
@@ -160,7 +160,7 @@ num_t readunary(char op)
 		// fallthrough
 	case '\0':
 		return eval(0, op, val);
-	case '^':
+	case '^': case 'v':
 		val = readexp(val, nextop);
 		return eval(0, op, val);
 	default:

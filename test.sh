@@ -27,5 +27,4 @@ testcase 7dot '7.' 7
 testcase mono '-4*3^2' -36
 testcase sqroot '2v4' 2
 testcase cbroot '3v8' 2
-testcase cbroot- '3v-8' -2
-testcase root2 '2v2' 1.414214
+testcase root2 '2v2' 1.41421
