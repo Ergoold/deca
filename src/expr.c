@@ -43,8 +43,8 @@ num_t readatom(void)
 {
 	char fchar = advance();
 	if (!isdec(fchar) && fchar != '.' && fchar != '(' && fchar != '|'
-			&& fchar != '+' && fchar != '-') {
-		error("expected number, '(', '|', '+' or '-'");
+			&& fchar != '+' && fchar != '-' && fchar != 'v') {
+		error("expected number, '(', '|', '+', '-', or 'v'");
 		return 0;
 	}
 
@@ -66,7 +66,7 @@ num_t readatom(void)
 		return absolute(val);
 	}
 
-	if (fchar == '+' || fchar == '-')
+	if (fchar == '+' || fchar == '-' || fchar == 'v')
 		return readunary(fchar);
 
 	putback();
@@ -148,6 +148,9 @@ num_t readexp(num_t val, char op)
 
 num_t readunary(char op)
 {
+	num_t implicit_operand = 0;
+	if (op == 'v') implicit_operand = 2;
+
 	num_t val = readatom();
 	if (haderror()) return val;
 	char nextop = advance();
@@ -159,10 +162,10 @@ num_t readunary(char op)
 		putback();
 		// fallthrough
 	case '\0':
-		return eval(0, op, val);
+		return eval(implicit_operand, op, val);
 	case '^': case 'v':
 		val = readexp(val, nextop);
-		return eval(0, op, val);
+		return eval(implicit_operand, op, val);
 	default:
 		error("unrecognized operation");
 		return 0;
