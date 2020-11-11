@@ -33,7 +33,6 @@ deca can evaluate any expression using real numbers, addition, subtraction, mult
 ### Planned
 
 The following additional features are currently planned:
- - mathematical constants
  - clean mode (-c), removing prompt and '='
  - interactive mode (-i), starting repl even with arguments
  - evaluation of some elementary functions
