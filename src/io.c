@@ -27,6 +27,11 @@ int isdec(char c)
 	return '0' <= c && c <= '9';
 }
 
+int isletter(char c)
+{
+	return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z');
+}
+
 int prompt(void)
 {
 	fputs("deca> ", stdout);

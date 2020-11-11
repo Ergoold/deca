@@ -9,6 +9,9 @@ char advance(void);
 /* tests if a character is a decimal digit */
 int isdec(char);
 
+/* tests if a character is an english letter */
+int isletter(char);
+
 /* prints the prompt to stdout and sets erred to 0; returns 0 on eof */
 int prompt(void);
 
