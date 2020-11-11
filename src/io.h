@@ -30,4 +30,7 @@ void initwith(char *);
 /* finalizes io */
 void finalize(void);
 
+/* scans a constant and returns its value */
+num_t scan_const(void);
+
 #endif /* !IO_H */

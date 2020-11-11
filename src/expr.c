@@ -64,6 +64,9 @@ num_t readatom(void)
 		if (isdec(fchar) || fchar == '.') {
 			putback();
 			return scan_num();
+		} else if (isletter(fchar)) {
+			putback();
+			return scan_const();
 		} else {
 			error("expected number, '(', '|', '+', '-', or 'v'");
 			return 0;
