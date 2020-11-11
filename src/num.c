@@ -10,24 +10,34 @@ num_t absolute(num_t n)
 num_t eval(num_t left, char op, num_t right)
 {
 	switch (op) {
-	case '+': return left + right;
-	case '-': return left - right;
-	case '*': return left * right;
+	case '+':
+		return left + right;
+	case '-':
+		return left - right;
+	case '*':
+		return left * right;
 	case '/':
-		  if (right == 0) {
+		if (right == 0) {
 			error("divided by zero");
 			return 0;
-		  }
-		  return left / right;
+		}
+		return left / right;
 	case '%':
-		  if (right == 0) {
+		if (right == 0) {
 			error("divided by zero");
 			return 0;
-		  }
-		  return left / right;
-	case '^': return pow(left, right);
+		}
+		return left / right;
+	case '^':
+		return pow(left, right);
+	case 'v':
+		if (right < 0) {
+			error("took root of negative number");
+			return 0;
+		}
+		return pow(right, 1 / left);
 	default:
-		  error("unrecognized operator");
-		  return 0;
+		error("unrecognized operator");
+		return 0;
 	}
 }

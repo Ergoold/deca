@@ -25,3 +25,8 @@ testcase minprec '0.5 + 0.5' 1
 testcase dot7 '.7' 0.7
 testcase 7dot '7.' 7
 testcase mono '-4*3^2' -36
+testcase sqroot '2v4' 2
+testcase cbroot '3v8' 2
+testcase root2 '2v2' 1.41421
+testcase sqrt 'v16' 4
+testcase phi '(1 + v5) / 2' 1.61803
