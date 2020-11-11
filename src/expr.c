@@ -42,35 +42,33 @@ num_t readexpr(void)
 num_t readatom(void)
 {
 	char fchar = advance();
-	if (!isdec(fchar) && fchar != '.' && fchar != '(' && fchar != '|'
-			&& fchar != '+' && fchar != '-' && fchar != 'v') {
-		error("expected number, '(', '|', '+', '-', or 'v'");
-		return 0;
-	}
-
-	if (fchar == '(') {
-		num_t val = readexpr();
+	switch (fchar) {
+	num_t val;
+	case '(':
+		val = readexpr();
 		if (advance() != ')') {
 			error("expected ')'");
 			return 0;
 		}
 		return val;
-	}
-
-	if (fchar == '|') {
-		num_t val = readexpr();
+	case '|':
+		val = readexpr();
 		if (advance() != '|') {
 			error("expected '|'");
 			return 0;
 		}
 		return absolute(val);
-	}
-
-	if (fchar == '+' || fchar == '-' || fchar == 'v')
+	case '+': case '-': case 'v':
 		return readunary(fchar);
-
-	putback();
-	return scan_num();
+	default:
+		if (isdec(fchar) || fchar == '.') {
+			putback();
+			return scan_num();
+		} else {
+			error("expected number, '(', '|', '+', '-', or 'v'");
+			return 0;
+		}
+	}
 }
 
 num_t readplus(num_t val, char op)
