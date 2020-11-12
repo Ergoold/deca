@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <getopt.h>
 #include "input.h"
@@ -8,6 +9,8 @@ void usage(void);
 
 int main(int argc, char **argv)
 {
+	opterr = 0;
+
 	int option;
 	while ((option = getopt(argc, argv, "+c")) != -1) {
 		switch (option) {
@@ -37,4 +40,5 @@ int main(int argc, char **argv)
 void usage(void)
 {
 	puts("usage: deca [-c] [expression]");
+	exit(2);
 }
