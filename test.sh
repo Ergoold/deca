@@ -30,3 +30,5 @@ testcase cbroot '3v8' 2
 testcase root2 '2v2' 1.41421
 testcase sqrt 'v16' 4
 testcase phi '(1 + v5) / 2' 1.61803
+testcase phi-phi 'phi - ((1 + v5) / 2)' 0
+testcase 2pi '2 * pi' 6.28319

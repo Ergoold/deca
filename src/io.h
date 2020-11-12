@@ -6,9 +6,6 @@
 /* reads the next character */
 char advance(void);
 
-/* tests if a character is a decimal digit */
-int isdec(char);
-
 /* prints the prompt to stdout and sets erred to 0; returns 0 on eof */
 int prompt(void);
 
@@ -26,5 +23,8 @@ void initwith(char *);
 
 /* finalizes io */
 void finalize(void);
+
+/* scans a constant and returns its value */
+num_t scan_const(void);
 
 #endif /* !IO_H */
