@@ -18,7 +18,7 @@ void show(num_t result)
 	printf("%g\n", result);
 }
 
-void clean(void)
+void clean_on(void)
 {
 	isclean = 1;
 }

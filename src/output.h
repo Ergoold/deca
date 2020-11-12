@@ -10,6 +10,6 @@ void show(num_t);
 void prompt(void);
 
 /* activate 'clean mode', removing prompts */
-void clean(void);
+void clean_on(void);
 
 #endif /* !OUTPUT_H */
