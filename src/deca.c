@@ -9,18 +9,20 @@ void usage(void);
 
 int main(int argc, char **argv)
 {
-	opterr = 0;
-
+	int prevind = 1;
 	int option;
-	while ((option = getopt(argc, argv, "+c")) != -1) {
+	do {
+		option = getopt(argc, argv, "+:c");
 		switch (option) {
 		case 'c':
 			clean_on();
 			break;
 		default:
-			usage();
+			option = -1;
+			optind = prevind;
 		}
-	}
+		prevind = optind;
+	} while (option != -1);
 
 	switch (argc - optind) {
 	case 0:
