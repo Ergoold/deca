@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include "num.h"
 #include "error.h"
-#include "io.h"
+#include "input.h"
 #include "const.h"
 
 #define MAX_LINE 256
@@ -13,7 +13,7 @@
 static char *line;
 
 /* the position of the current character */
-static char pos;
+static int pos;
 
 char advance(void)
 {
@@ -25,18 +25,12 @@ char advance(void)
 	return val;
 }
 
-int prompt(void)
+int readln(void)
 {
-	fputs("deca> ", stdout);
 	clearerror();
 	fgets(line, MAX_LINE, stdin);
 	pos = 0;
 	return !feof(stdin);
-}
-
-void show(num_t result)
-{
-	if (!haderror()) printf("= %g\n", result);
 }
 
 void putback(void)

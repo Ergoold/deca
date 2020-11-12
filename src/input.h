@@ -6,11 +6,8 @@
 /* reads the next character */
 char advance(void);
 
-/* prints the prompt to stdout and sets erred to 0; returns 0 on eof */
-int prompt(void);
-
-/* prints the result of an expression to stdout */
-void show(num_t);
+/* reads a new input line; returns 0 on eof */
+int readln(void);
 
 /* puts the last character back into the input */
 void putback(void);

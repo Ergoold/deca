@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "io.h"
+#include "input.h"
+#include "output.h"
 #include "expr.h"
 
 int main(int argc, char **argv)
@@ -7,7 +8,7 @@ int main(int argc, char **argv)
 	switch (argc) {
 	case 1:
 		initialize();
-		while (prompt()) show(readexpr());
+		while (prompt(), readln()) show(readexpr());
 		finalize();
 		break;
 	case 2:
