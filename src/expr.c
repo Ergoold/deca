@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "expr.h"
 #include "num.h"
 #include "error.h"
@@ -61,10 +62,10 @@ num_t readatom(void)
 	case '+': case '-': case 'v':
 		return readunary(fchar);
 	default:
-		if (isdec(fchar) || fchar == '.') {
+		if (isdigit(fchar) || fchar == '.') {
 			putback();
 			return scan_num();
-		} else if (isletter(fchar)) {
+		} else if (isalpha(fchar)) {
 			putback();
 			return scan_const();
 		} else {

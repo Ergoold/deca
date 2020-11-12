@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "num.h"
 #include "error.h"
 #include "io.h"
@@ -22,16 +23,6 @@ char advance(void)
 	if (val == '\n') val = '\0'; 
 	if (val == '\0') pos--;
 	return val;
-}
-
-int isdec(char c)
-{
-	return '0' <= c && c <= '9';
-}
-
-int isletter(char c)
-{
-	return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z');
 }
 
 int prompt(void)
@@ -81,12 +72,12 @@ num_t scan_num(void)
 
 num_t scan_const(void)
 {
-	if (!isletter(*(line + pos))) {
+	if (!isalpha(*(line + pos))) {
 		error("mathematical constant expected");
 		return 0;
 	}
 	int begin = pos;
-	while (isletter(*(line + ++pos)));
+	while (isalpha(*(line + ++pos)));
 	if (!strncmp(line + begin, E_C  , pos - begin)) return E;
 	if (!strncmp(line + begin, PHI_C, pos - begin)) return PHI;
 	if (!strncmp(line + begin, PI_C , pos - begin)) return PI;
