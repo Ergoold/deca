@@ -32,7 +32,7 @@ deca accepts the following command-line options:
 
  - `-c`
    
-   Activate *Clean Mode*, which does not print the repl prompt or the `= ` sign before results
+   Activate *Clean Mode*, which does not print the repl prompt or the `= ` sign before results.
 
  - `-i`
    
@@ -40,7 +40,7 @@ deca accepts the following command-line options:
 
 ## Features
 
-deca can evaluate any expression using real numbers, addition, subtraction, multiplication, division, exponentiation, parentheses and taking absolute values.
+deca can evaluate any expression using real numbers, addition, subtraction, multiplication, division, exponentiation, parentheses and taking absolute values and roots.
 
 ### Planned
 
