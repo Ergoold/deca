@@ -9,13 +9,17 @@ void usage(void);
 
 int main(int argc, char **argv)
 {
+	int isinteractive = 0;
 	int prevind = 1;
 	int option;
 	do {
-		option = getopt(argc, argv, "+:c");
+		option = getopt(argc, argv, "+:ci");
 		switch (option) {
 		case 'c':
 			clean_on();
+			break;
+		case 'i':
+			isinteractive = 1;
 			break;
 		default:
 			option = -1;
@@ -25,14 +29,15 @@ int main(int argc, char **argv)
 	} while (option != -1);
 
 	switch (argc - optind) {
+	case 1:
+		initwith(*(argv + optind));
+		show(readexpr());
+		if (!isinteractive) break;
+		// fallthrough
 	case 0:
 		initialize();
 		while (prompt(), readln()) show(readexpr());
 		finalize();
-		break;
-	case 1:
-		initwith(*(argv + optind));
-		show(readexpr());
 		break;
 	default:
 		usage();
