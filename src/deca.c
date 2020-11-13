@@ -46,6 +46,6 @@ int main(int argc, char **argv)
 
 void usage(void)
 {
-	puts("usage: deca [-c] [expression]");
+	puts("usage: deca [-c] [-i] [expression]");
 	exit(2);
 }
