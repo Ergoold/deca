@@ -1,5 +1,5 @@
-#ifndef IO_H
-#define IO_H
+#ifndef INPUT_H
+#define INPUT_H
 
 #include "num.h"
 
@@ -37,4 +37,4 @@ typedef struct {
 /* scans a constant and returns its value */
 scan_ret scan_const(void);
 
-#endif /* !IO_H */
+#endif /* !INPUT_H */
