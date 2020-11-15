@@ -4,7 +4,7 @@
 #include "expr.h"
 #include "num.h"
 #include "error.h"
-#include "io.h"
+#include "input.h"
 
 num_t readatom(void);
 num_t readplus(num_t, char);

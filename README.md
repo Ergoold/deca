@@ -26,14 +26,24 @@ deca> ^D
 $ 
 ```
 
+### Command-Line Options
+
+deca accepts the following command-line options:
+
+ - `-c`
+   
+   Activate *Clean Mode*, which does not print the repl prompt or the `= ` sign before results.
+
+ - `-i`
+   
+   Activate *Interactive Mode*, which opens the repl. This mode is active by default if no non-option command-line arguments are provided.
+
 ## Features
 
-deca can evaluate any expression using real numbers, addition, subtraction, multiplication, division, exponentiation, parentheses and taking absolute values.
+deca can evaluate any expression using real numbers, addition, subtraction, multiplication, division, exponentiation, parentheses and taking absolute values and roots.
 
 ### Planned
 
 The following additional features are currently planned:
- - clean mode (-c), removing prompt and '='
- - interactive mode (-i), starting repl even with arguments
  - evaluation of some elementary functions
  - complex number support
