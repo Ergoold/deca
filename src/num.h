@@ -3,6 +3,9 @@
 
 typedef double num_t;
 
+/* evaluates a function application with an argument */
+num_t evalfunc(int, num_t);
+
 /* evaluates an operator with two operands */
 num_t eval(num_t, char, num_t);
 

@@ -1,6 +1,7 @@
 #include <math.h>
 #include "num.h"
 #include "error.h"
+#include "const.h"
 
 num_t absolute(num_t n)
 {
@@ -38,6 +39,21 @@ num_t eval(num_t left, char op, num_t right)
 		return pow(right, 1 / left);
 	default:
 		error("unrecognized operator");
+		return 0;
+	}
+}
+
+num_t evalfunc(int func, num_t arg)
+{
+	switch (func) {
+	case SIN:
+		return sin(arg);
+	case COS:
+		return cos(arg);
+	case TAN:
+		return tan(arg);
+	default:
+		error("unrecognized function");
 		return 0;
 	}
 }

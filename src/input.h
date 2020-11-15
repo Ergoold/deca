@@ -21,7 +21,20 @@ void initwith(char *);
 /* finalizes io */
 void finalize(void);
 
+/* the return value of the scan_const function */
+typedef struct {
+	/* the tag for the tagged union */
+	int isfunc;
+	/* the returned value */
+	union {
+		/* the number that the constant is equivalent to */
+		num_t num;
+		/* the id of the function (see const.h) */
+		int func;
+	} value;
+} scan_ret;
+
 /* scans a constant and returns its value */
-num_t scan_const(void);
+scan_ret scan_const(void);
 
 #endif /* !IO_H */

@@ -64,17 +64,32 @@ num_t scan_num(void)
 	return val;
 }
 
-num_t scan_const(void)
+scan_ret scan_const(void)
 {
+	scan_ret ret = {1, {0}};
 	if (!isalpha(*(line + pos))) {
-		error("mathematical constant expected");
-		return 0;
+		error("mathematical constant or function expected");
+		return ret;
 	}
 	int begin = pos;
 	while (isalpha(*(line + ++pos)));
-	if (!strncmp(line + begin, E_C  , pos - begin)) return E;
-	if (!strncmp(line + begin, PHI_C, pos - begin)) return PHI;
-	if (!strncmp(line + begin, PI_C , pos - begin)) return PI;
-	error("unknown mathematical constant");
-	return 0;
+	if (!strncmp(line + begin, E_C  , pos - begin)) {
+		ret.isfunc = 0;
+		ret.value.num = E;
+	} else if (!strncmp(line + begin, PHI_C, pos - begin)) {
+		ret.isfunc = 0;
+		ret.value.num = PHI;
+	} else if (!strncmp(line + begin, PI_C , pos - begin)) {
+		ret.isfunc = 0;
+		ret.value.num = PI;
+	} else if (!strncmp(line + begin, SIN_C, pos - begin)) {
+		ret.value.func = SIN;
+	} else if (!strncmp(line + begin, COS_C, pos - begin)) {
+		ret.value.func = COS;
+	} else if (!strncmp(line + begin, TAN_C, pos - begin)) {
+		ret.value.func = TAN;
+	} else {
+		error("unknown mathematical constant or function");
+	}
+	return ret;
 }
