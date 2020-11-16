@@ -88,6 +88,12 @@ scan_ret scan_const(void)
 		ret.value.func = COS;
 	} else if (!strncmp(line + begin, TAN_C, pos - begin)) {
 		ret.value.func = TAN;
+	} else if (!strncmp(line + begin, COT_C, pos - begin)) {
+		ret.value.func = COT;
+	} else if (!strncmp(line + begin, SEC_C, pos - begin)) {
+		ret.value.func = SEC;
+	} else if (!strncmp(line + begin, CSC_C, pos - begin)) {
+		ret.value.func = CSC;
 	} else {
 		error("unknown mathematical constant or function");
 	}

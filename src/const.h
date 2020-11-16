@@ -26,6 +26,9 @@
 #define SIN 0
 #define COS 1
 #define TAN 2
+#define COT 3
+#define SEC 4
+#define CSC 5
 
 /*
  * once again, corresponding inputs
@@ -33,5 +36,8 @@
 #define SIN_C "sin"
 #define COS_C "cos"
 #define TAN_C "tan"
+#define COT_C "cot"
+#define SEC_C "sec"
+#define CSC_C "csc"
 
 #endif /* !CONST_H */

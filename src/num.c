@@ -52,6 +52,12 @@ num_t evalfunc(int func, num_t arg)
 		return cos(arg);
 	case TAN:
 		return tan(arg);
+	case COT:
+		return 1 / tan(arg);
+	case SEC:
+		return 1 / cos(arg);
+	case CSC:
+		return 1 / sin(arg);
 	default:
 		error("unrecognized function");
 		return 0;
