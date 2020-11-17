@@ -94,6 +94,12 @@ scan_ret scan_const(void)
 		ret.value.func = SEC;
 	} else if (!strncmp(line + begin, CSC_C, pos - begin)) {
 		ret.value.func = CSC;
+	} else if (!strncmp(line + begin, ARCSIN_C, pos - begin)) {
+		ret.value.func = ARCSIN;
+	} else if (!strncmp(line + begin, ARCCOS_C, pos - begin)) {
+		ret.value.func = ARCCOS;
+	} else if (!strncmp(line + begin, ARCTAN_C, pos - begin)) {
+		ret.value.func = ARCTAN;
 	} else {
 		error("unknown mathematical constant or function");
 	}

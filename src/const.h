@@ -29,6 +29,10 @@
 #define COT 3
 #define SEC 4
 #define CSC 5
+/* inverse trigonometric functions */
+#define ARCSIN 6
+#define ARCCOS 7
+#define ARCTAN 8
 
 /*
  * once again, corresponding inputs
@@ -39,5 +43,9 @@
 #define COT_C "cot"
 #define SEC_C "sec"
 #define CSC_C "csc"
+
+#define ARCSIN_C "arcsin"
+#define ARCCOS_C "arccos"
+#define ARCTAN_C "arctan"
 
 #endif /* !CONST_H */

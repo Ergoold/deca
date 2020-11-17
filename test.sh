@@ -39,3 +39,6 @@ testcase tan-1o5 'tan (1 / 5)' 0.20271
 testcase cot3 'cot 3' -7.01525
 testcase sec4 'sec 2^2' -1.52989
 testcase csc3 'csc 1.5 * 2' 7.08617
+testcase arcsin 'arcsin -1/2' -0.523599
+testcase arccos 'arccos 1/2' 1.0472
+testcase arctan 'arctan v2' 0.955317
