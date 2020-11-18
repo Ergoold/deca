@@ -33,6 +33,7 @@
 #define ARCSIN 6
 #define ARCCOS 7
 #define ARCTAN 8
+#define ARCCOT 9
 
 /*
  * once again, corresponding inputs
@@ -47,5 +48,6 @@
 #define ARCSIN_C "arcsin"
 #define ARCCOS_C "arccos"
 #define ARCTAN_C "arctan"
+#define ARCCOT_C "arccot"
 
 #endif /* !CONST_H */

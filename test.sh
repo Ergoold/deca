@@ -42,3 +42,4 @@ testcase csc3 'csc 1.5 * 2' 7.08617
 testcase arcsin 'arcsin -1/2' -0.523599
 testcase arccos 'arccos 1/2' 1.0472
 testcase arctan 'arctan v2' 0.955317
+testcase arccot 'arccot 1' 0.785398

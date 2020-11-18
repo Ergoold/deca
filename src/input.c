@@ -100,6 +100,8 @@ scan_ret scan_const(void)
 		ret.value.func = ARCCOS;
 	} else if (!strncmp(line + begin, ARCTAN_C, pos - begin)) {
 		ret.value.func = ARCTAN;
+	} else if (!strncmp(line + begin, ARCCOT_C, pos - begin)) {
+		ret.value.func = ARCCOT;
 	} else {
 		error("unknown mathematical constant or function");
 	}
