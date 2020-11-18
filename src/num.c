@@ -66,6 +66,10 @@ num_t evalfunc(int func, num_t arg)
 		return atan(arg);
 	case ARCCOT:
 		return PI/2 - atan(arg);
+	case ARCSEC:
+		return acos(1 / arg);
+	case ARCCSC:
+		return asin(1 / arg);
 	default:
 		error("unrecognized function");
 		return 0;
