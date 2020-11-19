@@ -40,6 +40,10 @@
 #define SINH 12
 #define COSH 13
 #define TANH 14
+/* inverse hyperbolic functions */
+#define ARSINH 18
+#define ARCOSH 19
+#define ARTANH 20
 
 /*
  * once again, corresponding inputs
@@ -61,5 +65,9 @@
 #define SINH_C "sinh"
 #define COSH_C "cosh"
 #define TANH_C "tanh"
+
+#define ARSINH_C "arsinh"
+#define ARCOSH_C "arcosh"
+#define ARTANH_C "artanh"
 
 #endif /* !CONST_H */

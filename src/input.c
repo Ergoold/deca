@@ -112,6 +112,12 @@ scan_ret scan_const(void)
 		ret.value.func = COSH;
 	} else if (!strncmp(line + begin, TANH_C, pos - begin)) {
 		ret.value.func = TANH;
+	} else if (!strncmp(line + begin, ARSINH_C, pos - begin)) {
+		ret.value.func = ARSINH;
+	} else if (!strncmp(line + begin, ARCOSH_C, pos - begin)) {
+		ret.value.func = ARCOSH;
+	} else if (!strncmp(line + begin, ARTANH_C, pos - begin)) {
+		ret.value.func = ARTANH;
 	} else {
 		error("unknown mathematical constant or function");
 	}
