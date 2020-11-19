@@ -71,55 +71,61 @@ scan_ret scan_const(void)
 		error("mathematical constant or function expected");
 		return ret;
 	}
-	int begin = pos;
+
+	char *begin = line + pos;
 	while (isalpha(*(line + ++pos)));
-	if (!strncmp(line + begin, E_C  , pos - begin)) {
+	char nextchar = *(line + pos);
+	*(line + pos) = '\0';
+
+	if (!strcmp(begin, E_C)) {
 		ret.isfunc = 0;
 		ret.value.num = E;
-	} else if (!strncmp(line + begin, PHI_C, pos - begin)) {
+	} else if (!strcmp(begin, PHI_C)) {
 		ret.isfunc = 0;
 		ret.value.num = PHI;
-	} else if (!strncmp(line + begin, PI_C , pos - begin)) {
+	} else if (!strcmp(begin, PI_C)) {
 		ret.isfunc = 0;
 		ret.value.num = PI;
-	} else if (!strncmp(line + begin, SIN_C, pos - begin)) {
+	} else if (!strcmp(begin, SIN_C)) {
 		ret.value.func = SIN;
-	} else if (!strncmp(line + begin, COS_C, pos - begin)) {
+	} else if (!strcmp(begin, COS_C)) {
 		ret.value.func = COS;
-	} else if (!strncmp(line + begin, TAN_C, pos - begin)) {
+	} else if (!strcmp(begin, TAN_C)) {
 		ret.value.func = TAN;
-	} else if (!strncmp(line + begin, COT_C, pos - begin)) {
+	} else if (!strcmp(begin, COT_C)) {
 		ret.value.func = COT;
-	} else if (!strncmp(line + begin, SEC_C, pos - begin)) {
+	} else if (!strcmp(begin, SEC_C)) {
 		ret.value.func = SEC;
-	} else if (!strncmp(line + begin, CSC_C, pos - begin)) {
+	} else if (!strcmp(begin, CSC_C)) {
 		ret.value.func = CSC;
-	} else if (!strncmp(line + begin, ARCSIN_C, pos - begin)) {
+	} else if (!strcmp(begin, ARCSIN_C)) {
 		ret.value.func = ARCSIN;
-	} else if (!strncmp(line + begin, ARCCOS_C, pos - begin)) {
+	} else if (!strcmp(begin, ARCCOS_C)) {
 		ret.value.func = ARCCOS;
-	} else if (!strncmp(line + begin, ARCTAN_C, pos - begin)) {
+	} else if (!strcmp(begin, ARCTAN_C)) {
 		ret.value.func = ARCTAN;
-	} else if (!strncmp(line + begin, ARCCOT_C, pos - begin)) {
+	} else if (!strcmp(begin, ARCCOT_C)) {
 		ret.value.func = ARCCOT;
-	} else if (!strncmp(line + begin, ARCSEC_C, pos - begin)) {
+	} else if (!strcmp(begin, ARCSEC_C)) {
 		ret.value.func = ARCSEC;
-	} else if (!strncmp(line + begin, ARCCSC_C, pos - begin)) {
+	} else if (!strcmp(begin, ARCCSC_C)) {
 		ret.value.func = ARCCSC;
-	} else if (!strncmp(line + begin, SINH_C, pos - begin)) {
+	} else if (!strcmp(begin, SINH_C)) {
 		ret.value.func = SINH;
-	} else if (!strncmp(line + begin, COSH_C, pos - begin)) {
+	} else if (!strcmp(begin, COSH_C)) {
 		ret.value.func = COSH;
-	} else if (!strncmp(line + begin, TANH_C, pos - begin)) {
+	} else if (!strcmp(begin, TANH_C)) {
 		ret.value.func = TANH;
-	} else if (!strncmp(line + begin, ARSINH_C, pos - begin)) {
+	} else if (!strcmp(begin, ARSINH_C)) {
 		ret.value.func = ARSINH;
-	} else if (!strncmp(line + begin, ARCOSH_C, pos - begin)) {
+	} else if (!strcmp(begin, ARCOSH_C)) {
 		ret.value.func = ARCOSH;
-	} else if (!strncmp(line + begin, ARTANH_C, pos - begin)) {
+	} else if (!strcmp(begin, ARTANH_C)) {
 		ret.value.func = ARTANH;
 	} else {
 		error("unknown mathematical constant or function");
 	}
+
+	*(line + pos) = nextchar;
 	return ret;
 }
