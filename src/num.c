@@ -70,6 +70,12 @@ num_t evalfunc(int func, num_t arg)
 		return acos(1 / arg);
 	case ARCCSC:
 		return asin(1 / arg);
+	case SINH:
+		return sinh(arg);
+	case COSH:
+		return cosh(arg);
+	case TANH:
+		return tanh(arg);
 	default:
 		error("unrecognized function");
 		return 0;

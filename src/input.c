@@ -106,6 +106,12 @@ scan_ret scan_const(void)
 		ret.value.func = ARCSEC;
 	} else if (!strncmp(line + begin, ARCCSC_C, pos - begin)) {
 		ret.value.func = ARCCSC;
+	} else if (!strncmp(line + begin, SINH_C, pos - begin)) {
+		ret.value.func = SINH;
+	} else if (!strncmp(line + begin, COSH_C, pos - begin)) {
+		ret.value.func = COSH;
+	} else if (!strncmp(line + begin, TANH_C, pos - begin)) {
+		ret.value.func = TANH;
 	} else {
 		error("unknown mathematical constant or function");
 	}

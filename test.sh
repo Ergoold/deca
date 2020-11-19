@@ -45,3 +45,6 @@ testcase arctan 'arctan v2' 0.955317
 testcase arccot 'arccot 1' 0.785398
 testcase arcsec 'arcsec -1' 3.14159
 testcase arccsc 'arccsc 2' 0.523599
+testcase sinh 'sinh 3' 10.0179
+testcase cosh 'cosh -2' 3.7622
+testcase tanh 'tanh 1.5' 0.905148

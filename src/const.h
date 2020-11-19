@@ -36,6 +36,10 @@
 #define ARCCOT 9
 #define ARCSEC 10
 #define ARCCSC 11
+/* hyperbolic functions */
+#define SINH 12
+#define COSH 13
+#define TANH 14
 
 /*
  * once again, corresponding inputs
@@ -53,5 +57,9 @@
 #define ARCCOT_C "arccot"
 #define ARCSEC_C "arcsec"
 #define ARCCSC_C "arccsc"
+
+#define SINH_C "sinh"
+#define COSH_C "cosh"
+#define TANH_C "tanh"
 
 #endif /* !CONST_H */
