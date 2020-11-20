@@ -6,6 +6,7 @@
 #include "error.h"
 #include "input.h"
 #include "const.h"
+#include "funcs.h"
 
 #define MAX_LINE 256
 
@@ -66,7 +67,7 @@ num_t scan_num(void)
 
 scan_ret scan_const(void)
 {
-	scan_ret ret = {1, {0}};
+	scan_ret ret = {1, {-1}};
 	if (!isalpha(*(line + pos))) {
 		error("mathematical constant or function expected");
 		return ret;
@@ -86,43 +87,15 @@ scan_ret scan_const(void)
 	} else if (!strcmp(begin, PI_C)) {
 		ret.isfunc = 0;
 		ret.value.num = PI;
-	} else if (!strcmp(begin, SIN_C)) {
-		ret.value.func = SIN;
-	} else if (!strcmp(begin, COS_C)) {
-		ret.value.func = COS;
-	} else if (!strcmp(begin, TAN_C)) {
-		ret.value.func = TAN;
-	} else if (!strcmp(begin, COT_C)) {
-		ret.value.func = COT;
-	} else if (!strcmp(begin, SEC_C)) {
-		ret.value.func = SEC;
-	} else if (!strcmp(begin, CSC_C)) {
-		ret.value.func = CSC;
-	} else if (!strcmp(begin, ARCSIN_C)) {
-		ret.value.func = ARCSIN;
-	} else if (!strcmp(begin, ARCCOS_C)) {
-		ret.value.func = ARCCOS;
-	} else if (!strcmp(begin, ARCTAN_C)) {
-		ret.value.func = ARCTAN;
-	} else if (!strcmp(begin, ARCCOT_C)) {
-		ret.value.func = ARCCOT;
-	} else if (!strcmp(begin, ARCSEC_C)) {
-		ret.value.func = ARCSEC;
-	} else if (!strcmp(begin, ARCCSC_C)) {
-		ret.value.func = ARCCSC;
-	} else if (!strcmp(begin, SINH_C)) {
-		ret.value.func = SINH;
-	} else if (!strcmp(begin, COSH_C)) {
-		ret.value.func = COSH;
-	} else if (!strcmp(begin, TANH_C)) {
-		ret.value.func = TANH;
-	} else if (!strcmp(begin, ARSINH_C)) {
-		ret.value.func = ARSINH;
-	} else if (!strcmp(begin, ARCOSH_C)) {
-		ret.value.func = ARCOSH;
-	} else if (!strcmp(begin, ARTANH_C)) {
-		ret.value.func = ARTANH;
 	} else {
+		for (int i = 0; i < FUNCTIONS; i++) {
+			if (!strcmp(begin, functions[i])) {
+				ret.value.func = i;
+				break;
+			}
+		}
+	}
+	if (ret.isfunc && ret.value.func == -1) {
 		error("unknown mathematical constant or function");
 	}
 

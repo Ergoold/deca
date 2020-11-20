@@ -23,32 +23,9 @@ enum {
 	SIN, COS, TAN, COT, SEC, CSC,
 	ARCSIN, ARCCOS, ARCTAN, ARCCOT, ARCSEC, ARCCSC,
 	SINH, COSH, TANH,
-	ARSINH, ARCOSH, ARTANH
+	ARSINH, ARCOSH, ARTANH,
+	/* the amount of functions */
+	FUNCTIONS
 };
-
-/*
- * once again, corresponding inputs
- */
-#define SIN_C "sin"
-#define COS_C "cos"
-#define TAN_C "tan"
-#define COT_C "cot"
-#define SEC_C "sec"
-#define CSC_C "csc"
-
-#define ARCSIN_C "arcsin"
-#define ARCCOS_C "arccos"
-#define ARCTAN_C "arctan"
-#define ARCCOT_C "arccot"
-#define ARCSEC_C "arcsec"
-#define ARCCSC_C "arccsc"
-
-#define SINH_C "sinh"
-#define COSH_C "cosh"
-#define TANH_C "tanh"
-
-#define ARSINH_C "arsinh"
-#define ARCOSH_C "arcosh"
-#define ARTANH_C "artanh"
 
 #endif /* !CONST_H */
