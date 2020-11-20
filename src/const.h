@@ -19,31 +19,12 @@
 #define PHI_C "phi"
 #define PI_C  "pi"
 
-/*
- * the value NAN is used to distinguish functions from numeric constants
- */
-/* trigonometric functions */
-#define SIN 0
-#define COS 1
-#define TAN 2
-#define COT 3
-#define SEC 4
-#define CSC 5
-/* inverse trigonometric functions */
-#define ARCSIN 6
-#define ARCCOS 7
-#define ARCTAN 8
-#define ARCCOT 9
-#define ARCSEC 10
-#define ARCCSC 11
-/* hyperbolic functions */
-#define SINH 12
-#define COSH 13
-#define TANH 14
-/* inverse hyperbolic functions */
-#define ARSINH 18
-#define ARCOSH 19
-#define ARTANH 20
+enum {
+	SIN, COS, TAN, COT, SEC, CSC,
+	ARCSIN, ARCCOS, ARCTAN, ARCCOT, ARCSEC, ARCCSC,
+	SINH, COSH, TANH,
+	ARSINH, ARCOSH, ARTANH
+};
 
 /*
  * once again, corresponding inputs
