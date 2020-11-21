@@ -76,6 +76,12 @@ num_t evalfunc(int func, num_t arg)
 		return cosh(arg);
 	case TANH:
 		return tanh(arg);
+	case COTH:
+		return 1 / tanh(arg);
+	case SECH:
+		return 1 / cosh(arg);
+	case CSCH:
+		return 1 / sinh(arg);
 	case ARSINH:
 		return asinh(arg);
 	case ARCOSH:

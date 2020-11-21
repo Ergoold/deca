@@ -4,7 +4,7 @@
 static char *functions[] = {
 	"sin", "cos", "tan", "cot", "sec", "csc",
 	"arcsin", "arccos", "arctan", "arccot", "arcsec", "arccsc",
-	"sinh", "cosh", "tanh",
+	"sinh", "cosh", "tanh", "coth", "sech", "csch",
 	"arsinh", "arcosh", "artanh",
 };
 
