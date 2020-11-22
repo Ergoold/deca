@@ -67,7 +67,7 @@ num_t scan_num(void)
 
 scan_ret scan_const(void)
 {
-	scan_ret ret = {1, {-1}};
+	scan_ret ret = {1, {.func = -1}};
 	if (!isalpha(*(line + pos))) {
 		error("mathematical constant or function expected");
 		return ret;
