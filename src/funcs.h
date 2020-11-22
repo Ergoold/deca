@@ -6,6 +6,7 @@ static char *functions[] = {
 	"arcsin", "arccos", "arctan",
 	"sinh", "cosh", "tanh",
 	"arsinh", "arcosh", "artanh",
+	"ln",
 };
 
 #endif /* !FUNCS_H */

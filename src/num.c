@@ -70,6 +70,8 @@ num_t evalfunc(int func, num_t arg)
 		return acosh(arg);
 	case ARTANH:
 		return atanh(arg);
+	case LN:
+		return log(arg);
 	default:
 		error("unrecognized function");
 		return 0;

@@ -24,6 +24,7 @@ enum {
 	ARCSIN, ARCCOS, ARCTAN,
 	SINH, COSH, TANH,
 	ARSINH, ARCOSH, ARTANH,
+	LN,
 	/* the amount of functions */
 	FUNCTIONS
 };

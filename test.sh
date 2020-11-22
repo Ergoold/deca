@@ -45,3 +45,4 @@ testcase tanh 'tanh 1.5' 0.905148
 testcase arsinh 'arsinh 10.0179' 3
 testcase arcosh 'arcosh 3.7622' 2
 testcase artanh 'artanh 0.905148' 1.5
+testcase ln 'ln e' 1
