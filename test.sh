@@ -36,21 +36,12 @@ testcase minus1 '-1' -1
 testcase sin1 'sin 1' 0.841471
 testcase cos1p1 'cos 1 + 1' 1.5403
 testcase tan-1o5 'tan (1 / 5)' 0.20271
-testcase cot3 'cot 3' -7.01525
-testcase sec4 'sec 2^2' -1.52989
-testcase csc3 'csc 1.5 * 2' 7.08617
 testcase arcsin 'arcsin -1/2' -0.523599
 testcase arccos 'arccos 1/2' 1.0472
 testcase arctan 'arctan v2' 0.955317
-testcase arccot 'arccot 1' 0.785398
-testcase arcsec 'arcsec -1' 3.14159
-testcase arccsc 'arccsc 2' 0.523599
 testcase sinh 'sinh 3' 10.0179
 testcase cosh 'cosh -2' 3.7622
 testcase tanh 'tanh 1.5' 0.905148
-testcase coth 'coth 1' 1.31304
-testcase sech 'sech 1 + 1' 1.64805
-testcase csch 'csch 1 * 2' 0.275721
 testcase arsinh 'arsinh 10.0179' 3
 testcase arcosh 'arcosh 3.7622' 2
 testcase artanh 'artanh 0.905148' 1.5

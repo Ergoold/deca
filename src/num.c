@@ -52,36 +52,18 @@ num_t evalfunc(int func, num_t arg)
 		return cos(arg);
 	case TAN:
 		return tan(arg);
-	case COT:
-		return 1 / tan(arg);
-	case SEC:
-		return 1 / cos(arg);
-	case CSC:
-		return 1 / sin(arg);
 	case ARCSIN:
 		return asin(arg);
 	case ARCCOS:
 		return acos(arg);
 	case ARCTAN:
 		return atan(arg);
-	case ARCCOT:
-		return PI/2 - atan(arg);
-	case ARCSEC:
-		return acos(1 / arg);
-	case ARCCSC:
-		return asin(1 / arg);
 	case SINH:
 		return sinh(arg);
 	case COSH:
 		return cosh(arg);
 	case TANH:
 		return tanh(arg);
-	case COTH:
-		return 1 / tanh(arg);
-	case SECH:
-		return 1 / cosh(arg);
-	case CSCH:
-		return 1 / sinh(arg);
 	case ARSINH:
 		return asinh(arg);
 	case ARCOSH:

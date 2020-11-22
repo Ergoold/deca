@@ -2,9 +2,9 @@
 #define FUNCS_H
 
 static char *functions[] = {
-	"sin", "cos", "tan", "cot", "sec", "csc",
-	"arcsin", "arccos", "arctan", "arccot", "arcsec", "arccsc",
-	"sinh", "cosh", "tanh", "coth", "sech", "csch",
+	"sin", "cos", "tan",
+	"arcsin", "arccos", "arctan",
+	"sinh", "cosh", "tanh",
 	"arsinh", "arcosh", "artanh",
 };
 
