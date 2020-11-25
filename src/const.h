@@ -1,8 +1,6 @@
 #ifndef CONST_H
 #define CONST_H
 
-#include <math.h>
-
 /* 
  * while they are common as extensions, the official c standard does not
  * require defining any of these constants in any standard header
