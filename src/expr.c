@@ -11,7 +11,7 @@ num_t readplus(num_t, char);
 num_t readmult(num_t, char);
 num_t readexp(num_t, char);
 num_t readunary(char);
-num_t readfunc(int);
+num_t readfunc(double (*func)(double));
 
 num_t readexpr(void)
 {
@@ -180,7 +180,7 @@ num_t readunary(char op)
 	}
 }
 
-num_t readfunc(int func)
+num_t readfunc(double (*func)(double))
 {
 	num_t arg = readatom();
 	if (haderror()) return 0;
@@ -192,13 +192,13 @@ num_t readfunc(int func)
 		putback();
 		//fallthrough
 	case '\0':
-		return evalfunc(func, arg);
+		return func(arg);
 	case '*': case '/': case '%':
 		arg = readmult(arg, nextop);
-		return evalfunc(func, arg);
+		return func(arg);
 	case '^': case 'v':
 		arg = readmult(arg, nextop);
-		return evalfunc(func, arg);
+		return func(arg);
 	default:
 		error("unrecognized operation");
 		return 0;

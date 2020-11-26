@@ -67,7 +67,7 @@ num_t scan_num(void)
 
 scan_ret scan_const(void)
 {
-	scan_ret ret = {1, {.func = -1}};
+	scan_ret ret = {1, {.func = NULL}};
 	if (!isalpha(*(line + pos))) {
 		error("mathematical constant or function expected");
 		return ret;
@@ -89,13 +89,13 @@ scan_ret scan_const(void)
 		ret.value.num = PI;
 	} else {
 		for (int i = 0; i < FUNCTIONS; i++) {
-			if (!strcmp(begin, functions[i])) {
-				ret.value.func = i;
+			if (!strcmp(begin, func_names[i])) {
+				ret.value.func = func_ptrs[i];
 				break;
 			}
 		}
 	}
-	if (ret.isfunc && ret.value.func == -1) {
+	if (ret.isfunc && ret.value.func == NULL) {
 		error("unknown mathematical constant or function");
 	}
 

@@ -29,8 +29,8 @@ typedef struct {
 	union {
 		/* the number that the constant is equivalent to */
 		num_t num;
-		/* the id of the function (see const.h) */
-		int func;
+		/* a pointer to the function */
+		double (*func)(double);
 	} value;
 } scan_ret;
 

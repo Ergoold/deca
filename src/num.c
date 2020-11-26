@@ -42,38 +42,3 @@ num_t eval(num_t left, char op, num_t right)
 		return 0;
 	}
 }
-
-num_t evalfunc(int func, num_t arg)
-{
-	switch (func) {
-	case SIN:
-		return sin(arg);
-	case COS:
-		return cos(arg);
-	case TAN:
-		return tan(arg);
-	case ARCSIN:
-		return asin(arg);
-	case ARCCOS:
-		return acos(arg);
-	case ARCTAN:
-		return atan(arg);
-	case SINH:
-		return sinh(arg);
-	case COSH:
-		return cosh(arg);
-	case TANH:
-		return tanh(arg);
-	case ARSINH:
-		return asinh(arg);
-	case ARCOSH:
-		return acosh(arg);
-	case ARTANH:
-		return atanh(arg);
-	case LN:
-		return log(arg);
-	default:
-		error("unrecognized function");
-		return 0;
-	}
-}
