@@ -190,7 +190,7 @@ num_t readfunc(double (*func)(double))
 	case ')': case '|':
 	case '+': case '-':
 		putback();
-		//fallthrough
+		// fallthrough
 	case '\0':
 		return func(arg);
 	case '*': case '/': case '%':
