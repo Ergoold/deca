@@ -75,7 +75,7 @@ num_t readatom(void)
 				return token.value.num;
 			}
 		} else {
-			error("expected number, '(', '|', '+', '-', or 'v'");
+			error("expected number, function, '(', '|', '+', '-', or 'v'");
 			return 0;
 		}
 	}
