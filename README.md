@@ -40,7 +40,7 @@ deca accepts the following command-line options:
 
 ## Features
 
-deca can evaluate any expression using real numbers, addition, subtraction, multiplication, division, exponentiation, parentheses and taking absolute values and roots.
+deca can evaluate any expression using real numbers, arithmetic operators, exponentiation, parentheses, many elementary functions and taking absolute values and roots.
 
 ### Planned
 
