@@ -1,7 +1,7 @@
 warnings = -Werror -Wall -Wextra -Wstrict-prototypes
 
 deca: out/deca.o out/error.o out/expr.o out/input.o out/num.o out/output.o
-	cc -o deca out/deca.o out/expr.o out/error.o out/input.o out/num.o out/output.o -lm
+	cc -o bin/deca out/deca.o out/expr.o out/error.o out/input.o out/num.o out/output.o -lm
 
 out/deca.o: src/deca.c
 	cc $(warnings) -c -o out/deca.o src/deca.c

@@ -1,5 +1,5 @@
-# binary executable
-/deca
+# output binaries directory
+bin/
 
 # project build directory
 out/
