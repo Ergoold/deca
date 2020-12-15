@@ -28,7 +28,7 @@ num_t eval(num_t left, char op, num_t right)
 			error("divided by zero");
 			return 0;
 		}
-		return left / right;
+		return fmod(left, right);
 	case '^':
 		return pow(left, right);
 	case 'v':
