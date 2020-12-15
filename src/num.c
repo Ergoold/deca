@@ -1,6 +1,7 @@
 #include <math.h>
 #include "num.h"
 #include "error.h"
+#include "const.h"
 
 num_t absolute(num_t n)
 {

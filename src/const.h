@@ -17,4 +17,14 @@
 #define PHI_C "phi"
 #define PI_C  "pi"
 
+enum {
+	SIN, COS, TAN,
+	ARCSIN, ARCCOS, ARCTAN,
+	SINH, COSH, TANH,
+	ARSINH, ARCOSH, ARTANH,
+	LN,
+	/* the amount of functions */
+	FUNCTIONS
+};
+
 #endif /* !CONST_H */

@@ -6,6 +6,7 @@
 #include "error.h"
 #include "input.h"
 #include "const.h"
+#include "funcs.h"
 
 #define MAX_LINE 256
 
@@ -64,17 +65,38 @@ num_t scan_num(void)
 	return val;
 }
 
-num_t scan_const(void)
+scan_ret scan_const(void)
 {
+	scan_ret ret = {0, {.func = NULL}};
 	if (!isalpha(*(line + pos))) {
-		error("mathematical constant expected");
-		return 0;
+		error("mathematical constant or function expected");
+		return ret;
 	}
-	int begin = pos;
+
+	char *begin = line + pos;
 	while (isalpha(*(line + ++pos)));
-	if (!strncmp(line + begin, E_C  , pos - begin)) return E;
-	if (!strncmp(line + begin, PHI_C, pos - begin)) return PHI;
-	if (!strncmp(line + begin, PI_C , pos - begin)) return PI;
-	error("unknown mathematical constant");
-	return 0;
+	char nextchar = *(line + pos);
+	*(line + pos) = '\0';
+
+	if (!strcmp(begin, E_C)) {
+		ret.value.num = E;
+	} else if (!strcmp(begin, PHI_C)) {
+		ret.value.num = PHI;
+	} else if (!strcmp(begin, PI_C)) {
+		ret.value.num = PI;
+	} else {
+		ret.isfunc = 1;
+		for (int i = 0; i < FUNCTIONS; i++) {
+			if (!strcmp(begin, func_names[i])) {
+				ret.value.func = func_ptrs[i];
+				break;
+			}
+		}
+	}
+	if (ret.isfunc && ret.value.func == NULL) {
+		error("unknown mathematical constant or function");
+	}
+
+	*(line + pos) = nextchar;
+	return ret;
 }

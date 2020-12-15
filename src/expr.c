@@ -11,6 +11,7 @@ num_t readplus(num_t, char);
 num_t readmult(num_t, char);
 num_t readexp(num_t, char);
 num_t readunary(char);
+num_t readfunc(double (*func)(double));
 
 num_t readexpr(void)
 {
@@ -67,9 +68,14 @@ num_t readatom(void)
 			return scan_num();
 		} else if (isalpha(fchar)) {
 			putback();
-			return scan_const();
+			scan_ret token = scan_const();
+			if (token.isfunc) {
+				return readfunc(token.value.func);
+			} else {
+				return token.value.num;
+			}
 		} else {
-			error("expected number, '(', '|', '+', '-', or 'v'");
+			error("expected number, function, '(', '|', '+', '-', or 'v'");
 			return 0;
 		}
 	}
@@ -168,6 +174,31 @@ num_t readunary(char op)
 	case '^': case 'v':
 		val = readexp(val, nextop);
 		return eval(implicit_operand, op, val);
+	default:
+		error("unrecognized operation");
+		return 0;
+	}
+}
+
+num_t readfunc(double (*func)(double))
+{
+	num_t arg = readatom();
+	if (haderror()) return 0;
+	char nextop = advance();
+
+	switch (nextop) {
+	case ')': case '|':
+	case '+': case '-':
+		putback();
+		// fallthrough
+	case '\0':
+		return func(arg);
+	case '*': case '/': case '%':
+		arg = readmult(arg, nextop);
+		return func(arg);
+	case '^': case 'v':
+		arg = readmult(arg, nextop);
+		return func(arg);
 	default:
 		error("unrecognized operation");
 		return 0;

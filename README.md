@@ -47,3 +47,5 @@ deca can evaluate any expression using real numbers, addition, subtraction, mult
 The following additional features are currently planned:
  - evaluation of some elementary functions
  - complex number support
+ - function exponentiation
+ - two-argument log

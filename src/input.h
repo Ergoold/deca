@@ -1,5 +1,5 @@
-#ifndef IO_H
-#define IO_H
+#ifndef INPUT_H
+#define INPUT_H
 
 #include "num.h"
 
@@ -21,7 +21,20 @@ void initwith(char *);
 /* finalizes io */
 void finalize(void);
 
-/* scans a constant and returns its value */
-num_t scan_const(void);
+/* the return value of the scan_const function */
+typedef struct {
+	/* the tag for the tagged union */
+	int isfunc;
+	/* the returned value */
+	union {
+		/* the number that the constant is equivalent to */
+		num_t num;
+		/* a pointer to the function */
+		double (*func)(double);
+	} value;
+} scan_ret;
 
-#endif /* !IO_H */
+/* scans a constant and returns its value */
+scan_ret scan_const(void);
+
+#endif /* !INPUT_H */

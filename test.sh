@@ -33,3 +33,16 @@ testcase phi '(1 + v5) / 2' 1.61803
 testcase phi-phi 'phi - ((1 + v5) / 2)' 0
 testcase 2pi '2 * pi' 6.28319
 testcase minus1 '-1' -1
+testcase sin1 'sin 1' 0.841471
+testcase cos1p1 'cos 1 + 1' 1.5403
+testcase tan-1o5 'tan (1 / 5)' 0.20271
+testcase arcsin 'arcsin -1/2' -0.523599
+testcase arccos 'arccos 1/2' 1.0472
+testcase arctan 'arctan v2' 0.955317
+testcase sinh 'sinh 3' 10.0179
+testcase cosh 'cosh -2' 3.7622
+testcase tanh 'tanh 1.5' 0.905148
+testcase arsinh 'arsinh 10.0179' 3
+testcase arcosh 'arcosh 3.7622' 2
+testcase artanh 'artanh 0.905148' 1.5
+testcase ln 'ln e' 1
