@@ -1,3 +1,5 @@
+dirs = out bin
+
 warnings = -Werror -Wall -Wextra -Wstrict-prototypes
 
 deca: out/deca.o out/error.o out/expr.o out/input.o out/num.o out/output.o
@@ -25,4 +27,6 @@ test: deca
 	./test.sh
 
 clean:
-	rm out/*
+	rm -rf $(dirs)
+
+$(shell mkdir -p $(dirs))
