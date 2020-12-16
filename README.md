@@ -14,7 +14,7 @@ $ deca '1 + 1'
 $ 
 ```
 
-When invoked with no arguments, deca starts in REPL mode, allowing you to type and evaluate multiple commands at your terminal:
+When invoked with no arguments, deca starts in REPL mode, allowing you to type and evaluate multiple expressions at your terminal:
 
 ```
 $ deca
@@ -32,7 +32,7 @@ deca accepts the following command-line options:
 
  - `-c`
    
-   Activate *Clean Mode*, which does not print the repl prompt or the `= ` sign before results.
+   Activate *Clean Mode*, which does not print the repl prompt or the `=` sign before results.
 
  - `-i`
    
