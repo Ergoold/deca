@@ -34,7 +34,7 @@ mathematical expressions.
 
 :: Features
 
-	deca can evaluate any expression using real numbers, arithmetic
+	deca can evaluate any expression using complex numbers, arithmetic
 	operators, exponentiation, parentheses, many elementary functions
 	and taking absolute values and roots.
 
