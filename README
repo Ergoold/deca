@@ -25,10 +25,10 @@ mathematical expressions.
 
 	deca accepts the following command-line options:
 
-		-c	Activate *Clean Mode*, which does not print the
-			repl prompt or the `=` sign before results.
+		-c	Activate Clean Mode, which does not print the
+			repl prompt or the equals sign before results.
 
-		-i	Activate *Interactive Mode*, which opens the
+		-i	Activate Interactive Mode, which opens the
 			repl. This mode is active by default if no
 			non-option command-line arguments are provided.
 
