@@ -53,3 +53,4 @@ testcase ifmt 'i' i
 testcase 1fmt '1' 1
 testcase -1fmt '-1' -1
 testcase -3ifmt '-3i' -3i
+testcase ip1 'i+1' 1+i
