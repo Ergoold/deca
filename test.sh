@@ -1,7 +1,7 @@
 #! /usr/bin/bash
 
 function testcase {
-	res=$(./deca "$2")
+	res=$(bin/deca "$2")
 	if [ "$res" = "= $3" ]; then
 		echo -e "test '$1':\tsuccess"
 	else
