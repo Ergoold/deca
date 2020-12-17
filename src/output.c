@@ -15,7 +15,22 @@ void show(num_t result)
 {
 	if (haderror()) return;
 	if (!isclean) fputs("= ", stdout);
-	printf("%g\n", result);
+	double real = creal(result);
+	double imag = cimag(result);
+	if (real == 0 && imag == 0) {
+		printf("0\n");
+		return;
+	}
+	if (real != 0) {
+		printf("%g", real);
+	}
+	if (imag == 1) {
+		printf("i\n");
+	} else if (imag == -1) {
+		printf("-i\n");
+	} else if (imag != 0) {
+		printf("%+g\n", imag);
+	}
 }
 
 void clean_on(void)

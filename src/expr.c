@@ -11,7 +11,7 @@ num_t readplus(num_t, char);
 num_t readmult(num_t, char);
 num_t readexp(num_t, char);
 num_t readunary(char);
-num_t readfunc(double (*func)(double));
+num_t readfunc(num_t (*func)(num_t));
 
 num_t readexpr(void)
 {
@@ -180,7 +180,7 @@ num_t readunary(char op)
 	}
 }
 
-num_t readfunc(double (*func)(double))
+num_t readfunc(num_t (*func)(num_t))
 {
 	num_t arg = readatom();
 	if (haderror()) return 0;

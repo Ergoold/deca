@@ -1,11 +1,12 @@
 #include <math.h>
+#include <complex.h>
 #include "num.h"
 #include "error.h"
 #include "const.h"
 
 num_t absolute(num_t n)
 {
-	return fabs(n);
+	return cabs(n);
 }
 
 num_t eval(num_t left, char op, num_t right)
@@ -28,15 +29,14 @@ num_t eval(num_t left, char op, num_t right)
 			error("divided by zero");
 			return 0;
 		}
-		return fmod(left, right);
-	case '^':
-		return pow(left, right);
-	case 'v':
-		if (right < 0) {
-			error("took root of negative number");
-			return 0;
+		if (cimag(right) != 0 || cimag(left) != 0) {
+			error("performed modulus with complex numbers");
 		}
-		return pow(right, 1 / left);
+		return fmod(creal(left), creal(right));
+	case '^':
+		return cpow(left, right);
+	case 'v':
+		return cpow(right, 1 / left);
 	default:
 		error("unrecognized operator");
 		return 0;
