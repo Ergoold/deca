@@ -15,8 +15,8 @@ void show(num_t result)
 {
 	if (haderror()) return;
 	if (!isclean) fputs("= ", stdout);
-	double real = creal(result);
-	double imag = cimag(result);
+	real_t real = creal(result);
+	real_t imag = cimag(result);
 	if (imag == 0) {
 		printf("%g\n", real);
 	} else if (real == 0) {

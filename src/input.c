@@ -58,7 +58,7 @@ void finalize(void)
 
 num_t scan_num(void)
 {
-	double val;
+	real_t val;
 	int len;
 	if (!sscanf(line + pos, "%lg%n", &val, &len))
 		error("expected number");

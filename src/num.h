@@ -3,6 +3,8 @@
 
 #include <complex.h>
 
+typedef double real_t;
+
 typedef complex double num_t;
 
 /* evaluates an operator with two operands */
