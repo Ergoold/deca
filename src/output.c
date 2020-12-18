@@ -19,19 +19,21 @@ void show(num_t result)
 	real_t imag = cimag(result);
 	if (imag == 0) {
 		printf("%g\n", real);
-	} else if (real == 0) {
-		if (imag == 1) {
+	} else if (imag == 1) {
+		if (real == 0) {
 			printf("i\n");
-		} else if (imag == -1) {
+		} else {
+			printf("%g+i\n", real);
+		}
+	} else if (imag == -1) {
+		if (real == 0) {
 			printf("-i\n");
 		} else {
-			printf("%gi\n", imag);
+			printf("%g-i\n", real);
 		}
 	} else {
-		if (imag == 1) {
-			printf("%g+i\n", real);
-		} else if (imag == -1) {
-			printf("%g-i\n", real);
+		if (real == 0) {
+			printf("%gi\n", imag);
 		} else {
 			printf("%g%+gi\n", imag, real);
 		}
