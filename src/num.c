@@ -31,6 +31,7 @@ num_t eval(num_t left, char op, num_t right)
 		}
 		if (cimag(right) != 0 || cimag(left) != 0) {
 			error("performed modulus with complex numbers");
+			return 0;
 		}
 		return fmod(creal(left), creal(right));
 	case '^':
