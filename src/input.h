@@ -30,7 +30,7 @@ typedef struct {
 		/* the number that the constant is equivalent to */
 		num_t num;
 		/* a pointer to the function */
-		double (*func)(double);
+		num_t (*func)(num_t);
 	} value;
 } scan_ret;
 

@@ -1,7 +1,8 @@
 #ifndef FUNCS_H
 #define FUNCS_H
 
-#include <math.h>
+#include <complex.h>
+#include "num.h"
 
 static char *func_names[] = {
 	"sin", "cos", "tan",
@@ -11,12 +12,12 @@ static char *func_names[] = {
 	"ln",
 };
 
-static double (*func_ptrs[])(double) = {
-	&sin, &cos, &tan,
-	&asin, &acos, &atan,
-	&sinh, &cosh, &tanh,
-	&asinh, &acosh, &atanh,
-	&log,
+static num_t (*func_ptrs[])(num_t) = {
+	&csin, &ccos, &ctan,
+	&casin, &cacos, &catan,
+	&csinh, &ccosh, &ctanh,
+	&casinh, &cacosh, &catanh,
+	&clog,
 };
 
 #endif /* !FUNCS_H */

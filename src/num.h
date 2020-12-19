@@ -1,7 +1,11 @@
 #ifndef NUM_H
 #define NUM_H
 
-typedef double num_t;
+#include <complex.h>
+
+typedef double real_t;
+
+typedef complex double num_t;
 
 /* evaluates an operator with two operands */
 num_t eval(num_t, char, num_t);

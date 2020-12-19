@@ -48,3 +48,9 @@ testcase artanh 'artanh 0.905148' 1.5
 testcase ln 'ln e' 1
 testcase 1mod2 '1 % 2' 1
 testcase 8mod3 '8 % 3' 2
+testcase zerofmt '0' 0
+testcase ifmt 'i' i
+testcase 1fmt '1' 1
+testcase -1fmt '-1' -1
+testcase -3ifmt '-3i' -3i
+testcase ip1 'i+1' 1+i
