@@ -23,6 +23,8 @@ out/num.o: src/num.c
 out/output.o: src/output.c
 	cc $(warnings) -c -o out/output.o src/output.c
 
+.PHONY: test clean
+
 test: bin/deca
 	test/runtests
 
