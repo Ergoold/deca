@@ -24,7 +24,7 @@ out/output.o: src/output.c
 	cc $(warnings) -c -o out/output.o src/output.c
 
 test: deca
-	./test.sh
+	test/runtests
 
 clean:
 	rm -rf $(dirs)
