@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+cut test/tests -f 1 | bin/deca -c | paste <(cut test/tests -f 1) - | sdiff -Bbsw 50 - test/tests

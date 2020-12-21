@@ -2,7 +2,7 @@ dirs = out bin
 
 warnings = -Werror -Wall -Wextra -Wstrict-prototypes
 
-deca: out/deca.o out/error.o out/expr.o out/input.o out/num.o out/output.o
+bin/deca: out/deca.o out/error.o out/expr.o out/input.o out/num.o out/output.o
 	cc -o bin/deca out/deca.o out/expr.o out/error.o out/input.o out/num.o out/output.o -lm
 
 out/deca.o: src/deca.c
@@ -23,8 +23,10 @@ out/num.o: src/num.c
 out/output.o: src/output.c
 	cc $(warnings) -c -o out/output.o src/output.c
 
-test: deca
-	./test.sh
+.PHONY: test clean
+
+test: bin/deca
+	test/runtests
 
 clean:
 	rm -rf $(dirs)
