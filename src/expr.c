@@ -182,6 +182,8 @@ num_t readunary(char op)
 
 num_t readfunc(num_t (*func)(num_t))
 {
+	if (func == NULL) return 0;
+
 	num_t exponent = 1;
 	if (advance() == '^') {
 		exponent = readatom();
