@@ -7,6 +7,9 @@ typedef double real_t;
 
 typedef complex double num_t;
 
+/* evaluates an exponentiated function call */
+num_t call(num_t (*)(num_t), num_t, num_t);
+
 /* evaluates an operator with two operands */
 num_t eval(num_t, char, num_t);
 

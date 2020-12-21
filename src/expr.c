@@ -182,6 +182,13 @@ num_t readunary(char op)
 
 num_t readfunc(num_t (*func)(num_t))
 {
+	num_t exponent = 1;
+	if (advance() == '^') {
+		exponent = readatom();
+	} else {
+		putback();
+	}
+
 	num_t arg = readatom();
 	if (haderror()) return 0;
 	char nextop = advance();
@@ -192,13 +199,13 @@ num_t readfunc(num_t (*func)(num_t))
 		putback();
 		// fallthrough
 	case '\0':
-		return func(arg);
+		return call(func, exponent, arg);
 	case '*': case '/': case '%':
 		arg = readmult(arg, nextop);
-		return func(arg);
+		return call(func, exponent, arg);
 	case '^': case 'v':
 		arg = readmult(arg, nextop);
-		return func(arg);
+		return call(func, exponent, arg);
 	default:
 		error("unrecognized operation");
 		return 0;
