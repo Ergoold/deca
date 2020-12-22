@@ -43,3 +43,25 @@ num_t eval(num_t left, char op, num_t right)
 		return 0;
 	}
 }
+
+int isint(num_t);
+
+num_t call(num_t (*func)(num_t), num_t exponent, num_t arg)
+{
+	if (!isint(exponent) || creal(exponent) < 0) {
+		error("raised function to unnatural power");
+		return 0;
+	}
+	num_t ret = arg;
+	for (int i = 0; i < creal(exponent); i++) {
+		// we know this ^ is natural due to the check above
+		ret = func(ret);
+	}
+	return ret;
+}
+
+int isint(num_t n) {
+	if (cimag(n) != 0) return 0;
+	real_t a = creal(n);
+	return trunc(a) == a;
+}
