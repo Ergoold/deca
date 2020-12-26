@@ -4,6 +4,11 @@
 #include "error.h"
 #include "const.h"
 
+num_t logarithm(num_t base, num_t arg)
+{
+	return log(arg) / log(base);
+}
+
 num_t absolute(num_t n)
 {
 	return cabs(n);

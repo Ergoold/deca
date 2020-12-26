@@ -16,6 +16,9 @@ num_t eval(num_t, char, num_t);
 /* returns the absolute value of a number */
 num_t absolute(num_t);
 
+/* returns the logarithm of a number in a base */
+num_t logarithm(num_t, num_t);
+
 /* scans a number from stdin */
 num_t scan_num(void);
 

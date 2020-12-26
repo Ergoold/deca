@@ -102,6 +102,8 @@ scan_ret scan_const(void)
 				break;
 			}
 		}
+		if (!strcmp(begin, "log"))
+			ret.tag = LOG;
 	}
 	if (ret.tag == FUN && ret.value.func == NULL) {
 		error("unknown mathematical constant or function");
