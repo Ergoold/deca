@@ -69,10 +69,14 @@ num_t readatom(void)
 		} else if (isalpha(fchar)) {
 			putback();
 			scan_ret token = scan_const();
-			if (token.isfunc) {
-				return readfunc(token.value.func);
-			} else {
-				return token.value.num;
+			switch (token.tag) {
+				case NUM:
+					return token.value.num;
+				case FUN:
+					return readfunc(token.value.func);
+				default:
+					error("expected constant or function");
+					return 0;
 			}
 		} else {
 			error("expected number, function, '(', '|', '+', '-', or 'v'");

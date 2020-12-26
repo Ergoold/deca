@@ -75,7 +75,7 @@ num_t scan_num(void)
 
 scan_ret scan_const(void)
 {
-	scan_ret ret = {0, {.func = NULL}};
+	scan_ret ret = {NUM, {.func = NULL}};
 	if (!isalpha(*(line + pos))) {
 		error("mathematical constant or function expected");
 		return ret;
@@ -95,7 +95,7 @@ scan_ret scan_const(void)
 	} else if (!strcmp(begin, I_C)) {
 		ret.value.num = I;
 	} else {
-		ret.isfunc = 1;
+		ret.tag = FUN;
 		for (int i = 0; i < FUNCTIONS; i++) {
 			if (!strcmp(begin, func_names[i])) {
 				ret.value.func = func_ptrs[i];
@@ -103,7 +103,7 @@ scan_ret scan_const(void)
 			}
 		}
 	}
-	if (ret.isfunc && ret.value.func == NULL) {
+	if (ret.tag == FUN && ret.value.func == NULL) {
 		error("unknown mathematical constant or function");
 	}
 
