@@ -26,7 +26,7 @@ typedef struct {
 	/* the tag for the tagged union */
 	int tag;
 	/* the returned value */
-	/* undefined if tag == LOG */
+	/* undefined if tag is not NUM or FUN */
 	union {
 		/* the number that the constant is equivalent to */
 		num_t num;
@@ -39,6 +39,7 @@ typedef struct {
 #define NUM 0 /* a numeric constant */
 #define FUN 1 /* an elementary function */
 #define LOG 2 /* two-argument logarithm */
+#define UNKNOWN -1 /* an unknown value */
 
 /* scans a constant and returns its value */
 scan_ret scan_const(void);

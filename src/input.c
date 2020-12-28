@@ -75,11 +75,9 @@ num_t scan_num(void)
 
 scan_ret scan_const(void)
 {
-	scan_ret ret = {NUM, {.func = NULL}};
-	if (!isalpha(*(line + pos))) {
-		error("mathematical constant or function expected");
+	scan_ret ret = {UNKNOWN, {.func = NULL}};
+	if (!isalpha(*(line + pos)))
 		return ret;
-	}
 
 	char *begin = line + pos;
 	while (isalpha(*(line + ++pos)));
@@ -87,26 +85,27 @@ scan_ret scan_const(void)
 	*(line + pos) = '\0';
 
 	if (!strcmp(begin, E_C)) {
+		ret.tag = NUM;
 		ret.value.num = E;
 	} else if (!strcmp(begin, PHI_C)) {
+		ret.tag = NUM;
 		ret.value.num = PHI;
 	} else if (!strcmp(begin, PI_C)) {
+		ret.tag = NUM;
 		ret.value.num = PI;
 	} else if (!strcmp(begin, I_C)) {
+		ret.tag = NUM;
 		ret.value.num = I;
 	} else {
-		ret.tag = FUN;
 		for (int i = 0; i < FUNCTIONS; i++) {
 			if (!strcmp(begin, func_names[i])) {
+				ret.tag = FUN;
 				ret.value.func = func_ptrs[i];
 				break;
 			}
 		}
 		if (!strcmp(begin, "log"))
 			ret.tag = LOG;
-	}
-	if (ret.tag == FUN && ret.value.func == NULL) {
-		error("unknown mathematical constant or function");
 	}
 
 	*(line + pos) = nextchar;
