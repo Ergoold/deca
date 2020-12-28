@@ -2,7 +2,6 @@
 #include <complex.h>
 #include "num.h"
 #include "error.h"
-#include "const.h"
 
 num_t logarithm(num_t base, num_t arg)
 {
