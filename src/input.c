@@ -63,7 +63,7 @@ num_t scan_num(void)
 	if (!sscanf(line + pos, "%lg%n", &val, &len))
 		error("expected number");
 	pos += len;
-	char next = advance();
+	char next = *(line + pos++);
 	if (next == 'i') {
 		return CMPLX(0, val);
 	} else if (next != '\0') {
