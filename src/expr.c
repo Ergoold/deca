@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <stddef.h>
 #include <ctype.h>
 #include "expr.h"
 #include "num.h"
@@ -12,6 +11,7 @@ num_t readmult(num_t, char);
 num_t readexp(num_t, char);
 num_t readunary(char);
 num_t readfunc(num_t (*func)(num_t));
+num_t readlog(void);
 
 num_t readexpr(void)
 {
@@ -69,10 +69,16 @@ num_t readatom(void)
 		} else if (isalpha(fchar)) {
 			putback();
 			scan_ret token = scan_const();
-			if (token.isfunc) {
-				return readfunc(token.value.func);
-			} else {
-				return token.value.num;
+			switch (token.tag) {
+				case NUM:
+					return token.value.num;
+				case FUN:
+					return readfunc(token.value.func);
+				case LOG:
+					return readlog();
+				default:
+					error("expected constant or function");
+					return 0;
 			}
 		} else {
 			error("expected number, function, '(', '|', '+', '-', or 'v'");
@@ -208,6 +214,33 @@ num_t readfunc(num_t (*func)(num_t))
 	case '^': case 'v':
 		arg = readmult(arg, nextop);
 		return call(func, exponent, arg);
+	default:
+		error("unrecognized operation");
+		return 0;
+	}
+}
+
+num_t readlog()
+{
+	num_t base = readatom();
+	if (haderror()) return 0;
+	num_t arg = readatom();
+	if (haderror()) return 0;
+	char nextop = advance();
+
+	switch (nextop) {
+	case ')': case '|':
+	case '+': case '-':
+		putback();
+		// fallthrough
+	case '\0':
+		return logarithm(base, arg);
+	case '*': case '/': case '%':
+		arg = readmult(arg, nextop);
+		return logarithm(base, arg);
+	case '^': case 'v':
+		arg = readmult(arg, nextop);
+		return logarithm(base, arg);
 	default:
 		error("unrecognized operation");
 		return 0;

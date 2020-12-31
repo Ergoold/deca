@@ -42,4 +42,5 @@ mathematical expressions.
 
 		The following additional features are currently planned:
 
-			- two-argument log
+			- custom constants
+			- implicit multiplication
