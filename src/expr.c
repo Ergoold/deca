@@ -126,8 +126,8 @@ num_t readmult(num_t val, char op)
 	case '\0':
 		return eval(val, op, nextval);
 	case '*': case '/': case '%':
-		nextval = readexp(nextval, nextop);
-		return eval(val, op, nextval);
+		nextval = eval(val, op, nextval);
+		return readmult(nextval, nextop);
 	case '^': case 'v':
 		nextval = readexp(nextval, nextop);
 		return eval(val, op, nextval);
