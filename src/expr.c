@@ -199,25 +199,8 @@ num_t readfunc(num_t (*func)(num_t))
 
 	num_t arg = readatom();
 	if (haderror()) return 0;
-	char nextop = advance();
 
-	switch (nextop) {
-	case ')': case '|':
-	case '+': case '-':
-		putback();
-		// fallthrough
-	case '\0':
-		return call(func, exponent, arg);
-	case '*': case '/': case '%':
-		arg = readmult(arg, nextop);
-		return call(func, exponent, arg);
-	case '^': case 'v':
-		arg = readmult(arg, nextop);
-		return call(func, exponent, arg);
-	default:
-		error("unrecognized operation");
-		return 0;
-	}
+	return call(func, exponent, arg);
 }
 
 num_t readlog()
@@ -226,23 +209,6 @@ num_t readlog()
 	if (haderror()) return 0;
 	num_t arg = readatom();
 	if (haderror()) return 0;
-	char nextop = advance();
 
-	switch (nextop) {
-	case ')': case '|':
-	case '+': case '-':
-		putback();
-		// fallthrough
-	case '\0':
-		return logarithm(base, arg);
-	case '*': case '/': case '%':
-		arg = readmult(arg, nextop);
-		return logarithm(base, arg);
-	case '^': case 'v':
-		arg = readmult(arg, nextop);
-		return logarithm(base, arg);
-	default:
-		error("unrecognized operation");
-		return 0;
-	}
+	return logarithm(base, arg);
 }
