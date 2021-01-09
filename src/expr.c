@@ -6,10 +6,10 @@
 #include "input.h"
 
 num_t readatom(void);
-num_t readplus(num_t, char);
-num_t readmult(num_t, char);
-num_t readexp(num_t, char);
-num_t readunary(char);
+num_t readplus(num_t, token);
+num_t readmult(num_t, token);
+num_t readexp(num_t, token);
+num_t readunary(token);
 num_t readfunc(num_t (*func)(num_t));
 num_t readlog(void);
 
@@ -18,92 +18,77 @@ num_t readexpr(void)
 	num_t val = readatom();
 	if (haderror()) return val;
 
-	char op = ' ';
-	while (op != '\0' && op != ')' && op != '|') {
+	token op;
+	while (op.kind != EOL) {
 		op = advance();
-		switch (op) {
-		case '\0': case ')': case '|': break;
-		case '+': case '-':
+		switch (op.kind) {
+		case EOL: case CLOSE_PAREN: case ABS: break;
+		case ADD: case SUB:
 			val = readplus(val, op);
 			break;
-		case '*': case '/': case '%':
+		case MUL: case DIV: case MOD:
 			val = readmult(val, op);
 			break;
-		case '^': case 'v':
+		case EXP: case ROOT:
 			val = readexp(val, op);
 			break;
 		default:
 			error("unrecognized operation");
 			break;
 		}
-	}
-	putback();
+	} while (op.kind != EOL);
+	/* todo putback */
 	return val;
 }
 
 num_t readatom(void)
 {
-	char fchar = advance();
-	switch (fchar) {
+	token tok = advance();
 	num_t val;
-	case '(':
+	switch (tok.kind) {
+	case OPEN_PAREN:
 		val = readexpr();
-		if (advance() != ')') {
+		if (advance().kind != CLOSE_PAREN) {
 			error("expected ')'");
 			return 0;
 		}
 		return val;
-	case '|':
+	case ABS:
 		val = readexpr();
-		if (advance() != '|') {
+		if (advance().kind != ABS) {
 			error("expected '|'");
 			return 0;
 		}
 		return absolute(val);
-	case '+': case '-': case 'v':
-		return readunary(fchar);
+	case ADD: case SUB: case ROOT:
+		return readunary(tok);
+	case NUM:
+		return /* todo */;
+	case ID:
+		return /* todo */;
 	default:
-		if (isdigit(fchar) || fchar == '.') {
-			putback();
-			return scan_num();
-		} else if (isalpha(fchar)) {
-			putback();
-			scan_ret token = scan_const();
-			switch (token.tag) {
-				case NUM:
-					return token.value.num;
-				case FUN:
-					return readfunc(token.value.func);
-				case LOG:
-					return readlog();
-				default:
-					error("expected constant or function");
-					return 0;
-			}
-		} else {
-			error("expected number, function, '(', '|', '+', '-', or 'v'");
+			error("expected identifier, '(', '|', '+', '-', or 'v'");
 			return 0;
-		}
 	}
 }
 
-num_t readplus(num_t val, char op)
+num_t readplus(num_t val, token op)
 {
 	num_t nextval = readatom();
 	if (haderror()) return val;
-	char nextop = advance();
+	token nextop = advance();
 
-	switch (nextop) {
-	case ')': case '|':
-	case '+': case '-':
+	switch (nextop.kind) {
+	case CLOSE_PAREN: case ABS:
+	case ADD: case SUB:
 		putback();
 		// fallthrough
-	case '\0':
+	case EOL:
 		return eval(val, op, nextval);
-	case '*': case '/': case '%':
+	case MUL: case DIV: case MOD:
 		nextval = readmult(nextval, nextop);
 		return eval(val, op, nextval);
-	case '^': case 'v':
+	case EXP: case ROOT:
 		nextval = readexp(nextval, nextop);
 		return eval(val, op, nextval);
 	default:
@@ -112,23 +97,23 @@ num_t readplus(num_t val, char op)
 	}
 }
 
-num_t readmult(num_t val, char op)
+num_t readmult(num_t val, token op)
 {
 	num_t nextval = readatom();
 	if (haderror()) return val;
-	char nextop = advance();
+	token nextop = advance();
 
-	switch (nextop) {
-	case ')': case '|':
-	case '+': case '-':
+	switch (nextop.kind) {
+	case CLOSE_PAREN: case ABS:
+	case ADD: case SUB:
 		putback();
 		// fallthrough
-	case '\0':
+	case EOL:
 		return eval(val, op, nextval);
-	case '*': case '/': case '%':
+	case MUL: case DIV: case MOD:
 		nextval = eval(val, op, nextval);
 		return readmult(nextval, nextop);
-	case '^': case 'v':
+	case EXP: case ROOT:
 		nextval = readexp(nextval, nextop);
 		return eval(val, op, nextval);
 	default:
@@ -137,21 +122,21 @@ num_t readmult(num_t val, char op)
 	}
 }
 
-num_t readexp(num_t val, char op)
+num_t readexp(num_t val, token op)
 {
 	num_t nextval = readatom();
 	if (haderror()) return val;
-	char nextop = advance();
+	token nextop = advance();
 
-	switch (nextop) {
-	case ')': case '|':
-	case '+': case '-':
-	case '*': case '/': case '%':
+	switch (nextop.kind) {
+	case CLOSE_PAREN: case ABS:
+	case ADD: case SUB:
+	case MUL: case DIV: case MOD:
 		putback();
 		// fallthrough
-	case '\0':
+	case EOL:
 		return eval(val, op, nextval);
-	case '^': case 'v':
+	case EXP: case ROOT:
 		nextval = readexp(nextval, nextop);
 		return eval(val, op, nextval);
 	default:
@@ -160,24 +145,24 @@ num_t readexp(num_t val, char op)
 	}
 }
 
-num_t readunary(char op)
+num_t readunary(token op)
 {
 	num_t implicit_operand = 0;
-	if (op == 'v') implicit_operand = 2;
+	if (op.kind == ROOT) implicit_operand = 2;
 
 	num_t val = readatom();
 	if (haderror()) return val;
-	char nextop = advance();
+	token nextop = advance();
 
-	switch (nextop) {
-	case ')': case '|':
-	case '+': case '-':
-	case '*': case '/': case '%':
+	switch (nextop.kind) {
+	case CLOSE_PAREN: case ABS:
+	case ADD: case SUB:
+	case MUL: case DIV: case MOD:
 		putback();
 		// fallthrough
-	case '\0':
+	case EOL:
 		return eval(implicit_operand, op, val);
-	case '^': case 'v':
+	case EXP: case ROOT:
 		val = readexp(val, nextop);
 		return eval(implicit_operand, op, val);
 	default:
@@ -191,10 +176,10 @@ num_t readfunc(num_t (*func)(num_t))
 	if (func == NULL) return 0;
 
 	num_t exponent = 1;
-	if (advance() == '^') {
+	if (advance().kind == '^') {
 		exponent = readatom();
 	} else {
-		putback();
+		/* todo putback */
 	}
 
 	num_t arg = readatom();

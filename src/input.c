@@ -17,7 +17,59 @@ static char *line;
 /* the position of the current character */
 static int pos;
 
-char advance(void)
+token advance(void)
+{
+	token tok = {ERR, line + pos, NULL};
+	char next = nextchar();
+	switch (next) {
+	case '+':
+		tok.kind = ADD;
+		break;
+	case '-':
+		tok.kind = SUB;
+		break;
+	case '*':
+		tok.kind = MUL;
+		break;
+	case '/':
+		tok.kind = DIV;
+		break;
+	case '%':
+		tok.kind = MOD;
+		break;
+	case '^':
+		tok.kind = EXP;
+		break;
+	case 'v':
+		tok.kind = ROOT;
+		break;
+	case '(':
+		tok.kind = OPEN_PAREN;
+		break;
+	case ')':
+		tok.kind = CLOSE_PAREN;
+		break;
+	case '|':
+		tok.kind = ABS;
+		break;
+	case '\0':
+		tok.kind = EOL;
+		break;
+	default:
+		putback();
+		if (isdigit(next) || next == '.') {
+			scan_num();
+		} else if (isalpha(next)) {
+			scan_id();
+		} else {
+			error("unexpected character");
+		}
+	}
+	tok.end = line + pos;
+	return tok;
+}
+
+char nextchar(void)
 {
 	char val = ' ';
 	while (val == ' ' || val == '\t')
@@ -56,58 +108,15 @@ void finalize(void)
 	putchar('\n');
 }
 
-num_t scan_num(void)
+void scan_num(void)
 {
-	real_t val;
 	int len;
-	if (!sscanf(line + pos, "%lg%n", &val, &len))
+	if (!sscanf(line + pos, "%*lg%n", &len))
 		error("expected number");
 	pos += len;
-	char next = *(line + pos++);
-	if (next == 'i') {
-		return CMPLX(0, val);
-	} else if (next != '\0') {
-		/* we read an actual character, not eol */
-		putback();
-	}
-	return val;
 }
 
-scan_ret scan_const(void)
+void scan_id(void)
 {
-	scan_ret ret = {UNKNOWN, {.func = NULL}};
-	if (!isalpha(*(line + pos)))
-		return ret;
-
-	char *begin = line + pos;
 	while (isalpha(*(line + ++pos)));
-	char nextchar = *(line + pos);
-	*(line + pos) = '\0';
-
-	if (!strcmp(begin, E_C)) {
-		ret.tag = NUM;
-		ret.value.num = E;
-	} else if (!strcmp(begin, PHI_C)) {
-		ret.tag = NUM;
-		ret.value.num = PHI;
-	} else if (!strcmp(begin, PI_C)) {
-		ret.tag = NUM;
-		ret.value.num = PI;
-	} else if (!strcmp(begin, I_C)) {
-		ret.tag = NUM;
-		ret.value.num = I;
-	} else {
-		for (int i = 0; i < FUNCTIONS; i++) {
-			if (!strcmp(begin, func_names[i])) {
-				ret.tag = FUN;
-				ret.value.func = func_ptrs[i];
-				break;
-			}
-		}
-		if (!strcmp(begin, "log"))
-			ret.tag = LOG;
-	}
-
-	*(line + pos) = nextchar;
-	return ret;
 }

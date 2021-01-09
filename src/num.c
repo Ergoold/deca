@@ -13,22 +13,22 @@ num_t absolute(num_t n)
 	return cabs(n);
 }
 
-num_t eval(num_t left, char op, num_t right)
+num_t eval(num_t left, token op, num_t right)
 {
-	switch (op) {
-	case '+':
+	switch (op.kind) {
+	case ADD:
 		return left + right;
-	case '-':
+	case SUB:
 		return left - right;
-	case '*':
+	case MUL:
 		return left * right;
-	case '/':
+	case DIV:
 		if (right == 0) {
 			error("divided by zero");
 			return 0;
 		}
 		return left / right;
-	case '%':
+	case MOD:
 		if (right == 0) {
 			error("divided by zero");
 			return 0;
@@ -38,9 +38,9 @@ num_t eval(num_t left, char op, num_t right)
 			return 0;
 		}
 		return fmod(creal(left), creal(right));
-	case '^':
+	case EXP:
 		return cpow(left, right);
-	case 'v':
+	case ROOT:
 		return cpow(right, 1 / left);
 	default:
 		error("unrecognized operator");

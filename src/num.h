@@ -2,6 +2,7 @@
 #define NUM_H
 
 #include <complex.h>
+#include "token.h"
 
 typedef double real_t;
 
@@ -11,7 +12,7 @@ typedef complex double num_t;
 num_t call(num_t (*)(num_t), num_t, num_t);
 
 /* evaluates an operator with two operands */
-num_t eval(num_t, char, num_t);
+num_t eval(num_t, token, num_t);
 
 /* returns the absolute value of a number */
 num_t absolute(num_t);
