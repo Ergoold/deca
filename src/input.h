@@ -7,6 +7,9 @@
 /* reads the next token */
 token advance(void);
 
+/* puts the token back into the stream */
+void putback(token);
+
 /* reads a new input line; returns 0 on eof */
 int readln(void);
 

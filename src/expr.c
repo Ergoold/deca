@@ -37,7 +37,7 @@ num_t readexpr(void)
 			break;
 		}
 	} while (op.kind != EOL);
-	/* todo putback */
+	putback(op);
 	return val;
 }
 
@@ -81,7 +81,7 @@ num_t readplus(num_t val, token op)
 	switch (nextop.kind) {
 	case CLOSE_PAREN: case ABS:
 	case ADD: case SUB:
-		putback();
+		putback(nextop);
 		// fallthrough
 	case EOL:
 		return eval(val, op, nextval);
@@ -106,7 +106,7 @@ num_t readmult(num_t val, token op)
 	switch (nextop.kind) {
 	case CLOSE_PAREN: case ABS:
 	case ADD: case SUB:
-		putback();
+		putback(nextop);
 		// fallthrough
 	case EOL:
 		return eval(val, op, nextval);
@@ -132,7 +132,7 @@ num_t readexp(num_t val, token op)
 	case CLOSE_PAREN: case ABS:
 	case ADD: case SUB:
 	case MUL: case DIV: case MOD:
-		putback();
+		putback(nextop);
 		// fallthrough
 	case EOL:
 		return eval(val, op, nextval);
@@ -158,7 +158,7 @@ num_t readunary(token op)
 	case CLOSE_PAREN: case ABS:
 	case ADD: case SUB:
 	case MUL: case DIV: case MOD:
-		putback();
+		putback(nextop);
 		// fallthrough
 	case EOL:
 		return eval(implicit_operand, op, val);
@@ -176,10 +176,12 @@ num_t readfunc(num_t (*func)(num_t))
 	if (func == NULL) return 0;
 
 	num_t exponent = 1;
-	if (advance().kind == '^') {
+	token next = advance();
+	if (next.kind == '^') {
 		exponent = readatom();
 	} else {
 		/* todo putback */
+		putback(next);
 	}
 
 	num_t arg = readatom();

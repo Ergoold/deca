@@ -17,7 +17,23 @@ static char *line;
 /* the position of the current character */
 static int pos;
 
+/* the buffer token from putback */
+static token *buffer = NULL;
+
+token putback(token tok)
+{
+	buffer = tok;
+}
+
 token advance(void)
+{
+	if (buffer == NULL) return readtok();
+	token tok = *buffer;
+	buffer = NULL;
+	return tok;
+}
+
+token readtok(void)
 {
 	token tok = {ERR, line + pos, NULL};
 	char next = nextchar();
@@ -56,7 +72,7 @@ token advance(void)
 		tok.kind = EOL;
 		break;
 	default:
-		putback();
+		pos--;
 		if (isdigit(next) || next == '.') {
 			scan_num();
 		} else if (isalpha(next)) {
@@ -85,11 +101,6 @@ int readln(void)
 	fgets(line, MAX_LINE, stdin);
 	pos = 0;
 	return !feof(stdin);
-}
-
-void putback(void)
-{
-	pos--;
 }
 
 void initialize(void)
